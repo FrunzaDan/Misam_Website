@@ -1,1 +1,62 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+    --red: #D9251C;
+    --white: #FFF;
+    --bold-font: "Bold", sans-serif;
+    --regular-font: Regular, sans-serif;
+    --light-font: Light, sans-serif;
+}
+
+.btn-primary {
+    background-color: var(--red) !important;
+    border-color: var(--red) !important;
+    color: var(--white) !important;
+}
+
+@font-face {
+    font-family: 'Bold';
+    src: url('./assets/fonts/Inter-Bold.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Regular';
+    src: url('./assets/fonts/Inter-Regular.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Light';
+    src: url('./assets/fonts/Inter-Light.ttf') format('truetype');
+}
+
+.hover-item {
+    position: relative;
+    transition: all .2s;
+    transform-origin: 50% 50%;
+}
+
+@media (pointer: fine) {
+    .hover-item:hover {
+        transform: scale(1.1);
+    }
+
+    .btn-primary:hover {
+        background-color: var(--white) !important;
+        color: var(--red) !important;
+    }
+
+    .btn-primary:active {
+        background-color: var(--red) !important;
+        color: var(--white) !important;
+    }
+}
+
+@media (hover: none),
+(pointer: coarse) {
+    .hover-item:active {
+        transform: scale(1.1);
+    }
+
+    .btn-primary:active {
+        background-color: var(--white) !important;
+        color: var(--red) !important;
+    }
+}

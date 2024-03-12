@@ -24,12 +24,3 @@ export const routes: Routes = [
   },
   { path: 'cart', component: CartComponent },
 ];
-@NgModule({
-  imports: [
-    RouterModule.forRoot(routes, {
-      preloadingStrategy: PreloadAllModules,
-    }),
-  ],
-  exports: [RouterModule],
-})
-export class AppRoutingModule {}

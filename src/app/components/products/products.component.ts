@@ -1,12 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, NgModule } from '@angular/core';
+import { ProductsListComponent } from '../products-list/products-list.component';
 
 @Component({
-  selector: 'app-products',
   standalone: true,
-  imports: [],
+  imports: [ProductsListComponent],
+  selector: 'app-products',
   templateUrl: './products.component.html',
-  styleUrl: './products.component.css'
+  styleUrl: './products.component.css',
 })
-export class ProductsComponent {
-
-}
+export class ProductsComponent {}

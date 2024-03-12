@@ -1,0 +1,17 @@
+<div class="container d-flex flex-wrap justify-content-around">
+    <ng-container *ngFor="let item of filterCategory">
+        <div class="card m-2 hover-item" style="width: 18rem;">
+            <img src="{{item.image}}" class="card-img-top" alt="sample-product">
+            <div class="card-body">
+                <h5 class="card-title">{{item.title}}</h5>
+                <p class="card-text">
+                    {{item.description}}
+                </p>
+                <p>
+                    <strong>Price:</strong> ${{item.price}}
+                </p>
+                <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+        </div>
+    </ng-container>
+</div>

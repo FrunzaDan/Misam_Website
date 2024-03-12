@@ -1,23 +1,72 @@
 [
   {
     "id": 1,
-    "name": "product 1",
+    "title": "product 1",
     "price": 29.99,
     "description": "Test Description 1",
-    "photo": "./images/products/sample_img.webp"
+    "image": "../../../assets/images/products/sample_img.webp"
   },
   {
     "id": 2,
-    "name": "product 2",
+    "title": "product 2",
     "price": 79.95,
     "description": "Test Description 2",
-    "photo": "./images/products/sample_img.webp"
+    "image": "../../../assets/images/products/sample_img.webp"
   },
   {
     "id": 3,
-    "name": "product 3",
+    "title": "product 3",
     "price": 44.5,
     "description": "Test Description 3",
-    "photo": "./images/products/sample_img.webp"
+    "image": "../../../assets/images/products/sample_img.webp"
+  },
+  {
+    "id": 4,
+    "title": "product 1",
+    "price": 29.99,
+    "description": "Test Description 1",
+    "image": "../../../assets/images/products/sample_img.webp"
+  },
+  {
+    "id": 5,
+    "title": "product 2",
+    "price": 79.95,
+    "description": "Test Description 2",
+    "image": "../../../assets/images/products/sample_img.webp"
+  },
+  {
+    "id": 6,
+    "title": "product 3",
+    "price": 44.5,
+    "description": "Test Description 3",
+    "image": "../../../assets/images/products/sample_img.webp"
+  },
+  {
+    "id": 7,
+    "title": "product 1",
+    "price": 29.99,
+    "description": "Test Description 1",
+    "image": "../../../assets/images/products/sample_img.webp"
+  },
+  {
+    "id": 8,
+    "title": "product 2",
+    "price": 79.95,
+    "description": "Test Description 2",
+    "image": "../../../assets/images/products/sample_img.webp"
+  },
+  {
+    "id": 9,
+    "title": "product 3",
+    "price": 44.5,
+    "description": "Test Description 3",
+    "image": "../../../assets/images/products/sample_img.webp"
+  },
+  {
+    "id": 10,
+    "title": "product 3",
+    "price": 44.5,
+    "description": "Test Description 3",
+    "image": "../../../assets/images/products/sample_img.webp"
   }
 ]

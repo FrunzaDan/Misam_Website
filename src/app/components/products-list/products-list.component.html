@@ -1,6 +1,6 @@
 <div class="container d-flex flex-wrap justify-content-around">
     <ng-container *ngFor="let item of filterCategory">
-        <div class="card m-2 hover-item" style="width: 18rem;">
+        <div class="card m-2 hover-card" style="width: 18rem;">
             <img src="{{item.image}}" class="card-img-top" alt="sample-product">
             <div class="card-body">
                 <h5 class="card-title">{{item.title}}</h5>
@@ -8,9 +8,9 @@
                     {{item.description}}
                 </p>
                 <p>
-                    <strong>Price:</strong> ${{item.price}}
+                    <strong>Preț:</strong> {{item.price}} RON
                 </p>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
+                <button class="btn btn-primary" (click)=addtocart(item)>Adaugă la comandă</button>
             </div>
         </div>
     </ng-container>

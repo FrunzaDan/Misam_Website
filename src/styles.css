@@ -33,9 +33,19 @@
     transform-origin: 50% 50%;
 }
 
+.hover-card {
+    position: relative;
+    transition: all .2s;
+    transform-origin: 50% 50%;
+}
+
 @media (pointer: fine) {
     .hover-item:hover {
         transform: scale(1.1);
+    }
+
+    .hover-card:hover {
+        transform: scale(1.04);
     }
 
     .btn-primary:hover {
@@ -53,6 +63,10 @@
 (pointer: coarse) {
     .hover-item:active {
         transform: scale(1.1);
+    }
+
+    .hover-card:active {
+        transform: scale(1.04);
     }
 
     .btn-primary:active {

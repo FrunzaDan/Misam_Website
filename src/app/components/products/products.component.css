@@ -1,0 +1,9 @@
+.form-control {
+    width: 20rem;
+}
+
+.search-icon {
+    position: relative;
+    z-index: 10;
+    color: var(--red);
+}

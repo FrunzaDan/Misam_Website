@@ -1,9 +1,18 @@
+.form-group {
+    width: 100%;
+}
+
 .form-control {
-    width: 20rem;
+    width: 100%;
 }
 
 .search-icon {
-    position: relative;
+    position: absolute;
     z-index: 10;
+    right: 59%;
     color: var(--red);
+}
+
+.cart-button {
+    width: 100%;
 }

@@ -1,22 +1,21 @@
-<h1>PRODUCTS-NG-COMPONENT</h1>
-
-<div class="container">
-    <div class="row">
-        <div class="col-sm">
-            <span class="d-flex">
-                <span class="form-group m-2">
-                    <input type="text" class="form-control" (keyup)="search($event)" placeholder="search products">
-                </span>
-                <span class="search-icon m-2">
-                    <i class="bi bi-search"></i>
-                </span>
-            </span>
+<div class="container mb-4">
+    <div class="card">
+        <div class="row justify-content-center align-items-center m-2">
+            Găsește și comandă produse:
         </div>
-        <div class="col-sm">
-            <button routerLink="../cart" class="btn btn-primary m-2 ms-auto">
-                <i class="bi bi-cart"></i>
-                <div class="badge bg-danger">{{totalItem}}</div>
-            </button>
+        <div class="row justify-content-center align-items-center m-2">
+            <div class="col-sm my-2">
+                <div class="form-group">
+                    <input type="text" class="form-control" (keyup)="search($event)" placeholder="caută produse">
+                </div>
+            </div>
+            <div class="col-sm my-2">
+                <button routerLink="../cart" class="btn btn-primary cart-button">
+                    <i class="bi bi-cart m-2"></i>
+                    <div class="badge bg-danger m-2">{{totalItem}}</div>
+                </button>
+
+            </div>
         </div>
     </div>
 </div>

@@ -1,6 +1,5 @@
 <ng-container *ngIf="products.length != 0">
     <div class="container" style="overflow-x:auto;">
-
         <div class="row">
             <table class="table table-responsive">
                 <thead>
@@ -35,17 +34,22 @@
             </table>
         </div>
 
-        <div class="card p-2">
-            <div class="row p-2">
-                <div class="col text-center">
-                    <button routerLink="/products" class="btn btn-primary cart-button p-2">Cumpără mai multe
-                        produse</button>
-                </div>
-                <div class="col text-center">
-                    <button class="btn btn-success cart-button p-2">Plasează comanda</button>
-                </div>
-                <div class="col text-center">
-                    <button (click)="emptycart()" class="btn btn-primary cart-button p-2">Golește coșul</button>
+        <div class="row">
+            <div class="col">
+                <div class="card p-2 m-4">
+                    <div class="row p-2">
+                        <div class="col justify-content-center align-items-center text-center my-2">
+                            <button routerLink="/products" class="btn btn-primary cart-button p-2 h-100">Cumpără mai
+                                multe produse</button>
+                        </div>
+                        <div class="col justify-content-center align-items-center text-center my-2">
+                            <button class="btn btn-success cart-button p-2 h-100">Plasează comanda</button>
+                        </div>
+                        <div class="col justify-content-center align-items-center text-center my-2">
+                            <button (click)="emptycart()" class="btn btn-primary cart-button p-2 h-100">Golește
+                                coșul</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -56,13 +60,15 @@
 <ng-container *ngIf="products.length == 0">
     <div class="container">
         <div class="card empty-cart-card">
-            <h5 class="card-title">Comanda mea</h5>
-        </div>
-        <div class="center">
-            <img src="../../../assets/images/empty_cart.svg" alt="">
-            <h4>Comanda ta este golă</h4>
-            <h6>Adaugă produse la comandă</h6>
-            <button routerLink="/products" class="btn btn-primary">Caută produse</button>
+            <div class="row d-flex justify-content-center align-items-center text-center">
+                <div class="col">
+                    <h5 class="card-title m-2">Comanda mea</h5>
+                    <img src="../../../assets/images/empty_cart.svg" style="width: 14rem;" class=" p-2 m-4" alt="">
+                    <h4>Comanda ta este goală</h4>
+                    <h6>Adaugă produse la comandă</h6>
+                    <button routerLink="/products" class="btn btn-primary p-2 m-4">Caută produse</button>
+                </div>
+            </div>
         </div>
     </div>
 </ng-container>

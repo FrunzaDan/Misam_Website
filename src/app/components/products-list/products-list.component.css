@@ -1,4 +1,5 @@
 .product-card {
+    border: 1px solid var(--white);
     width: 16rem;
     margin-top: 1rem;
     margin-bottom: 1rem;

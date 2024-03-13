@@ -6,7 +6,8 @@
         <div class="row justify-content-center align-items-center m-2">
             <div class="col-sm my-2">
                 <div class="form-group">
-                    <input type="text" class="form-control" (keyup)="search($event)" placeholder="caută produse">
+                    <input type="text" class="form-control" [(ngModel)]="searchTerm" (keyup)="search($event)"
+                        placeholder="caută produse">
                 </div>
             </div>
             <div class="col-sm my-2">

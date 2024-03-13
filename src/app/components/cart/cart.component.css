@@ -1,7 +1,8 @@
 .empty-cart-card {
-    height: 60vh;
     margin: 1rem;
     padding: 1rem;
+    border: 1px solid var(--red);
+    ;
 }
 
 .center img {
@@ -25,24 +26,6 @@ h6 {
 .table {
     table-layout: fixed;
 }
-
-.center {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
-}
-
-.center .btn {
-    font-size: 14px !important;
-    margin-top: 20px !important;
-    font-weight: 400;
-    padding: 12px 72px;
-    border-radius: 3px !important;
-}
-
-
 
 th {
     text-align: center;

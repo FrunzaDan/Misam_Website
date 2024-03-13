@@ -10,7 +10,7 @@
 
 .btn-primary {
     background-color: var(--red) !important;
-    border-color: var(--red) !important;
+    border-color: white !important;
     color: var(--white) !important;
 }
 
@@ -35,29 +35,32 @@ body {
     overflow-y: scroll;
     scroll-behavior: smooth;
     scrollbar-width: none;
+    font-family: var(--light-font);
 }
 
 @font-face {
     font-family: 'Bold';
-    src: url('./assets/fonts/Inter-Bold.ttf') format('truetype');
+    src: url('./assets/fonts/DMSans_18pt-Bold.ttf') format('truetype');
 }
 
 @font-face {
     font-family: 'Regular';
-    src: url('./assets/fonts/Inter-Regular.ttf') format('truetype');
+    src: url('./assets/fonts/DMSans_18pt-Regular.ttf') format('truetype');
 }
 
 @font-face {
     font-family: 'Light';
-    src: url('./assets/fonts/Inter-Light.ttf') format('truetype');
+    src: url('./assets/fonts/DMSans_18pt-Light.ttf') format('truetype');
 }
 
 .card {
     border: 1px solid var(--red);
+    color: white;
     background: linear-gradient(-45deg,
-            rgba(var(--main-red-for-alpha), 0.5),
-            rgba(var(--main-violet-for-alpha), 0.5),
-            rgba(var(--main-red-for-alpha), 0.5));
+            rgba(var(--main-red-for-alpha), 0.9),
+            rgba(var(--main-violet-for-alpha), 0.9),
+            rgba(var(--main-red-for-alpha), 0.9));
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
 .form-control {

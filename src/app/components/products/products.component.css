@@ -16,3 +16,24 @@
 .cart-button {
     width: 100%;
 }
+
+.product-card {
+    border: 1px solid var(--white);
+    width: 16rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+@media only screen and (min-width: 576px) and (max-width: 768px) {
+    .product-card {
+        width: 14rem;
+    }
+}
+
+@media only screen and (max-width: 576px) {
+    .product-card {
+        width: 18rem;
+        margin-top: 0.6rem;
+        margin-bottom: 0.6rem;
+    }
+}

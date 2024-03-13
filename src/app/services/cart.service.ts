@@ -7,7 +7,6 @@ import { BehaviorSubject } from 'rxjs';
 export class CartService {
   public cartItemList: any = [];
   public productList = new BehaviorSubject<any>([]);
-  public searchString = new BehaviorSubject<string>('');
 
   constructor() {}
 
@@ -35,11 +34,12 @@ export class CartService {
   }
 
   removeCartItem(product: any) {
-    this.cartItemList.map((a: any, index: any) => {
-      if (product.id === a.id) {
-        this.cartItemList.splice(index, 1);
+    for (let i = this.cartItemList.length - 1; i >= 0; i--) {
+      if (product.id === this.cartItemList[i].id) {
+        this.cartItemList.splice(i, 1);
+        break;
       }
-    });
+    }
     this.productList.next(this.cartItemList);
   }
 

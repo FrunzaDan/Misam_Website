@@ -1,7 +1,7 @@
 [
   {
     "id": 1,
-    "title": "product 1",
+    "title": "product 21",
     "price": 29.99,
     "description": "Test Description 1",
     "image": "../../../assets/images/products/sample_img.webp",
@@ -9,7 +9,7 @@
   },
   {
     "id": 2,
-    "title": "product 2",
+    "title": "product 12",
     "price": 79.95,
     "description": "Test Description 2",
     "image": "../../../assets/images/products/sample_img.webp",

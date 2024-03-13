@@ -1,19 +1,25 @@
-<div class="container mb-4">
+<div class="container-fluid mb-4">
     <div class="card">
-        <div class="row justify-content-center align-items-center m-2">
-            Găsește și comandă produse:
+        <div class="row justify-content-center align-items-center p-2 m-2">
+            <h3 class="text-center pt-2 mt-2">Găsește și comandă produse:</h3>
         </div>
-        <div class="row justify-content-center align-items-center m-2">
-            <div class="col-sm my-2">
-                <div class="form-group">
-                    <input type="text" class="form-control" [(ngModel)]="searchKey" (keyup)="search($event)"
+        <div class="row justify-content-center align-items-center p-2 m-2">
+            <div class="col-md justify-content-center align-items-center text-center p-2 m-2">
+                <div class="form-group search-products-form-group">
+                    <input type="text" class="form-control search-products-form-control" (keyup)="search($event)"
                         placeholder="caută produse">
+                    <label><i class="bi bi-search search-icon"></i></label>
                 </div>
             </div>
-            <div class="col-sm my-2">
-                <button routerLink="../cart" class="btn btn-primary cart-button">
-                    <i class="bi bi-cart m-2"></i>
-                    <div class="badge bg-danger m-2">{{totalItem}}</div>
+            <div class="col-md justify-content-center align-items-center text-center p-2 m-2">
+                <button routerLink="../cart"
+                    class="btn btn-primary d-flex cart-button justify-content-center align-items-center text-center">
+                    <i class="bi bi-cart no-italics m-2">
+                        Comanda mea
+                    </i>
+                    <div class="badge bg-danger m-2">
+                        Produse: {{totalItem}}
+                    </div>
                 </button>
 
             </div>
@@ -21,7 +27,7 @@
     </div>
 </div>
 
-<div class="container">
+<div class="container-fluid">
     <div class="card py-2">
         <div class="container d-flex flex-wrap justify-content-around">
             <ng-container *ngFor="let item of filteredProductList">
@@ -35,7 +41,8 @@
                         <p>
                             <strong>Preț:</strong> {{item.price}} RON
                         </p>
-                        <button class="btn btn-primary" (click)=addtocart(item)>Adaugă la comandă</button>
+                        <button class="btn btn-primary add-to-cart-btn" (click)=addtocart(item)>Adaugă la
+                            comandă</button>
                     </div>
                 </div>
             </ng-container>

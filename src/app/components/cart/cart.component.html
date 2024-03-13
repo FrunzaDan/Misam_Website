@@ -13,11 +13,11 @@
                 </thead>
                 <tbody class="table-group-divider">
                     <tr *ngFor="let product of products; let i = index">
-                        <td style="width: 10px;">{{i+1}}</td>
-                        <td>{{product.title}}</td>
-                        <td><img src="{{product.image}}" alt="product" class="table-product-img"></td>
-                        <td>{{product.price}}</td>
-                        <td>
+                        <td valign="middle" style="width: 10px;">{{i+1}}</td>
+                        <td valign="middle">{{product.title}}</td>
+                        <td valign="middle"><img src="{{product.image}}" alt="product" class="table-product-img"></td>
+                        <td valign="middle">{{product.price}} RON</td>
+                        <td valign="middle">
                             <button (click)="removeItem(product)" class="btn btn-danger">
                                 <i class="bi bi-trash"></i>
                             </button>
@@ -63,7 +63,8 @@
             <div class="row d-flex justify-content-center align-items-center text-center">
                 <div class="col">
                     <h5 class="card-title m-2">Comanda mea</h5>
-                    <img src="../../../assets/images/empty_cart.svg" style="width: 14rem;" class=" p-2 m-4" alt="">
+                    <img src="../../../assets/images/empty_cart.svg" style="width: 14rem;" class="cart-img p-2 m-4"
+                        alt="">
                     <h4>Comanda ta este goală</h4>
                     <h6>Adaugă produse la comandă</h6>
                     <button routerLink="/products" class="btn btn-primary p-2 m-4">Caută produse</button>

@@ -35,6 +35,10 @@ td {
     text-align: center;
 }
 
+.cart-img {
+    filter: brightness(0) invert(1);
+}
+
 @media (min-width: 576px) {
     .table-product-img {
         width: 50%;

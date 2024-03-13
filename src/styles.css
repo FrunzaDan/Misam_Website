@@ -1,7 +1,8 @@
 :root {
     --red: #D9251C;
     --main-red-for-alpha: 217, 37, 28;
-    --main-violet-for-alpha: 150, 50, 179;
+    --violet: #8A2BE2;
+    --main-violet-for-alpha: 138, 43, 226;
     --white: #FFF;
     --bold-font: "Bold", sans-serif;
     --regular-font: Regular, sans-serif;
@@ -61,6 +62,10 @@ body {
             rgba(var(--main-violet-for-alpha), 0.9),
             rgba(var(--main-red-for-alpha), 0.9));
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.no-italics {
+    font-style: normal;
 }
 
 .form-control {

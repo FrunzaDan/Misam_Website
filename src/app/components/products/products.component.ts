@@ -18,8 +18,6 @@ export class ProductsComponent implements OnInit {
   public productList: any[] = [];
   public totalItem: number = 0;
   public searchString: string = '';
-  searchKey: string = '';
-  searchTimeout: any;
   public filteredProductList: any[] = [];
 
   constructor(
@@ -37,10 +35,6 @@ export class ProductsComponent implements OnInit {
       });
     });
 
-    this.cartService.searchString.subscribe((val: any) => {
-      this.searchKey = val;
-    });
-
     this.cartService.getProducts().subscribe((res) => {
       this.totalItem = res.length;
     });
@@ -50,15 +44,10 @@ export class ProductsComponent implements OnInit {
     this.cartService.addtoCart(item);
   }
 
-  search(event: any) {
-    this.searchString = (event.target as HTMLInputElement).value;
-    this.filteredProductList = this.productList;
-    if (this.searchString || this.searchString !== '') {
-      this.filteredProductList = this.filter.transform(
-        this.productList,
-        this.searchString,
-        'title'
-      );
-    }
+  search(event: Event) {
+    const searchString = (event.target as HTMLInputElement).value;
+    this.filteredProductList = searchString
+      ? this.filter.transform(this.productList, searchString, 'title')
+      : this.productList;
   }
 }

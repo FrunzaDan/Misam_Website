@@ -6,25 +6,24 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class FilterPipe implements PipeTransform {
   transform(
-    valuesArray: any[],
-    filterString: string,
-    productName: string
+    fetchedProductsArray: any[],
+    searchString: string,
+    title: string
   ): any[] {
     const filteredResults: any = [];
-    if (!valuesArray || filterString === '' || productName === '') {
-      return valuesArray;
+    if (!fetchedProductsArray || searchString === '' || title === '') {
+      return fetchedProductsArray;
     }
-    valuesArray.forEach((val: any) => {
+    fetchedProductsArray.forEach((fetchedProduct: any) => {
       if (
-        val[productName]
+        fetchedProduct[title]
           .trim()
           .toLowerCase()
-          .includes(filterString.toLowerCase())
+          .includes(searchString.toLowerCase())
       ) {
-        filteredResults.push(val);
+        filteredResults.push(fetchedProduct);
       }
     });
-    console.log(filteredResults);
     return filteredResults;
   }
 }

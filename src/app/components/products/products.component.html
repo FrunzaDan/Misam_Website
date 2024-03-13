@@ -6,7 +6,7 @@
         <div class="row justify-content-center align-items-center m-2">
             <div class="col-sm my-2">
                 <div class="form-group">
-                    <input type="text" class="form-control" [(ngModel)]="searchTerm" (keyup)="search($event)"
+                    <input type="text" class="form-control" [(ngModel)]="searchKey" (keyup)="search($event)"
                         placeholder="caută produse">
                 </div>
             </div>
@@ -24,7 +24,7 @@
 <div class="container">
     <div class="card py-2">
         <div class="container d-flex flex-wrap justify-content-around">
-            <ng-container *ngFor="let item of productList | filter:searchKey:'title'">
+            <ng-container *ngFor="let item of filteredProductList">
                 <div class="card product-card hover-card">
                     <img src="{{item.image}}" class="card-img-top" alt="sample-product">
                     <div class="card-body">

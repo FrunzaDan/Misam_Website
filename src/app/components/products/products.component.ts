@@ -5,6 +5,7 @@ import { FetchProductsService } from '../../services/fetch-products.service';
 import { CartService } from '../../services/cart.service';
 import { CommonModule } from '@angular/common';
 import { FilterPipe } from '../../shared/filter.pipe';
+import { debounceTime } from 'rxjs/operators';
 
 @Component({
   standalone: true,
@@ -14,20 +15,23 @@ import { FilterPipe } from '../../shared/filter.pipe';
   styleUrl: './products.component.css',
 })
 export class ProductsComponent implements OnInit {
-  public productList: any = [];
-  filteredProductList = [];
-  searchKey: string = '';
+  public productList: any[] = [];
   public totalItem: number = 0;
-  public searchTerm!: string;
+  public searchString: string = '';
+  searchKey: string = '';
+  searchTimeout: any;
+  public filteredProductList: any[] = [];
 
   constructor(
     private api: FetchProductsService,
-    private cartService: CartService
+    private cartService: CartService,
+    private filter: FilterPipe
   ) {}
 
   ngOnInit(): void {
     this.api.getProduct().subscribe((res) => {
       this.productList = res;
+      this.filteredProductList = this.productList;
       this.productList.forEach((a: any) => {
         Object.assign(a, { quantity: 1, total: a.price });
       });
@@ -47,8 +51,14 @@ export class ProductsComponent implements OnInit {
   }
 
   search(event: any) {
-    this.searchTerm = (event.target as HTMLInputElement).value;
-    console.log(this.searchTerm);
-    this.cartService.searchString.next(this.searchTerm);
+    this.searchString = (event.target as HTMLInputElement).value;
+    this.filteredProductList = this.productList;
+    if (this.searchString || this.searchString !== '') {
+      this.filteredProductList = this.filter.transform(
+        this.productList,
+        this.searchString,
+        'title'
+      );
+    }
   }
 }

@@ -73,6 +73,12 @@ body {
 
 }
 
+.hover-logo {
+    position: relative;
+    transition: all .2s;
+    transform-origin: 50% 50%;
+}
+
 .hover-item {
     position: relative;
     transition: all .2s;
@@ -94,6 +100,10 @@ body {
         transform: scale(1.04);
     }
 
+    .hover-logo:hover {
+        transform: scale(1.1);
+    }
+
     .btn-primary:hover {
         background-color: var(--white) !important;
         color: var(--red) !important;
@@ -112,7 +122,11 @@ body {
     }
 
     .hover-card:active {
-        transform: scale(1.04);
+        transform: scale(1.1);
+    }
+
+    .hover-logo:active {
+        transform: scale(1.1);
     }
 
     .btn-primary:active {

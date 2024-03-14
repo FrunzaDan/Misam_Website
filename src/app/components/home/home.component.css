@@ -1,11 +1,4 @@
-*,
-*::before,
-*::after {
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    background-color: red;
-
+.home-category-card {
+    text-align: center;
+    font-size: 2rem;
 }

@@ -55,7 +55,7 @@ body {
 }
 
 .card {
-    border: 1px solid var(--red);
+    border: none;
     color: white;
     background: linear-gradient(-45deg,
             rgba(var(--main-red-for-alpha), 0.9),

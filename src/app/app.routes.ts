@@ -4,6 +4,10 @@ import { HomeComponent } from './components/home/home.component';
 import { ProductsComponent } from './components/products/products.component';
 import { ContactComponent } from './components/contact/contact.component';
 import { CartComponent } from './components/cart/cart.component';
+import { PaymentInfoComponent } from './components/payment-info/payment-info.component';
+import { DeliveryInfoComponent } from './components/delivery-info/delivery-info.component';
+import { ReturnInfoComponent } from './components/return-info/return-info.component';
+import { TermsInfoComponent } from './components/terms-info/terms-info.component';
 
 export const routes: Routes = [
   {
@@ -22,5 +26,24 @@ export const routes: Routes = [
     path: 'contact',
     component: ContactComponent,
   },
-  { path: 'cart', component: CartComponent },
+  {
+    path: 'cart',
+    component: CartComponent,
+  },
+  {
+    path: 'payment-info',
+    component: PaymentInfoComponent,
+  },
+  {
+    path: 'delivery',
+    component: DeliveryInfoComponent,
+  },
+  {
+    path: 'return',
+    component: ReturnInfoComponent,
+  },
+  {
+    path: 'terms',
+    component: TermsInfoComponent,
+  },
 ];

@@ -1,4 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
+import { Product } from '../interfaces/product';
 
 @Pipe({
   name: 'filter',
@@ -6,17 +7,17 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class FilterPipe implements PipeTransform {
   transform(
-    fetchedProductsArray: any[],
+    fetchedProductsList: Product[],
     searchString: string,
     title: string
-  ): any[] {
-    const filteredResults: any = [];
-    if (!fetchedProductsArray || searchString === '' || title === '') {
-      return fetchedProductsArray;
+  ): Product[] {
+    const filteredResults: Product[] = [];
+    if (!fetchedProductsList || searchString === '' || title === '') {
+      return fetchedProductsList;
     }
-    fetchedProductsArray.forEach((fetchedProduct: any) => {
+    fetchedProductsList.forEach((fetchedProduct: Product) => {
       if (
-        fetchedProduct[title]
+        fetchedProduct.title
           .trim()
           .toLowerCase()
           .includes(searchString.toLowerCase())

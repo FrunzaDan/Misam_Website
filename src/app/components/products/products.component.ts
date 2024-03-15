@@ -5,7 +5,7 @@ import { FetchProductsService } from '../../services/fetch-products.service';
 import { CartService } from '../../services/cart.service';
 import { CommonModule } from '@angular/common';
 import { FilterPipe } from '../../shared/filter.pipe';
-import { debounceTime } from 'rxjs/operators';
+import { Product } from '../../interfaces/product';
 
 @Component({
   standalone: true,
@@ -15,10 +15,11 @@ import { debounceTime } from 'rxjs/operators';
   styleUrl: './products.component.css',
 })
 export class ProductsComponent implements OnInit {
-  public productList: any[] = [];
-  public totalItem: number = 0;
+  public productList: Product[] = [];
+  public totalNumberOfProducts: number = 0;
+  public totalPrice: number = 0;
   public searchString: string = '';
-  public filteredProductList: any[] = [];
+  public filteredProductList: Product[] = [];
 
   constructor(
     private api: FetchProductsService,
@@ -27,21 +28,28 @@ export class ProductsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.api.getProduct().subscribe((res) => {
-      this.productList = res;
+    this.api.getProduct().subscribe((productsList: Product[]) => {
+      this.productList = productsList;
       this.filteredProductList = this.productList;
-      this.productList.forEach((a: any) => {
-        Object.assign(a, { quantity: 1, total: a.price });
+      this.productList.forEach((a: Product) => {
+        Object.assign(a, { quantity: a.quantity, total: a.price });
       });
     });
 
-    this.cartService.getProducts().subscribe((res) => {
-      this.totalItem = res.length;
-    });
+    this.cartService
+      .getProductsForCart()
+      .subscribe((productsList: Product[]) => {
+        this.totalNumberOfProducts = productsList.reduce(
+          (totalQuantity, product) => {
+            return totalQuantity + product.quantity;
+          },
+          0
+        );
+      });
   }
 
-  addtocart(item: any) {
-    this.cartService.addtoCart(item);
+  addToCart(product: Product) {
+    this.cartService.addCartProduct(product);
   }
 
   search(event: Event) {

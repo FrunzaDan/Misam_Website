@@ -1,50 +1,60 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { Product } from '../interfaces/product';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CartService {
-  public cartItemList: any = [];
-  public productList = new BehaviorSubject<any>([]);
+  public cartProductsList: Product[] = [];
+  public productList: BehaviorSubject<Product[]> = new BehaviorSubject<
+    Product[]
+  >([]);
 
   constructor() {}
 
-  getProducts() {
+  getProductsForCart() {
     return this.productList.asObservable();
   }
 
-  setProduct(product: any) {
-    this.cartItemList.push(...product);
-    this.productList.next(product);
+  addCartProduct(addedProduct: Product) {
+    const existingProduct = this.cartProductsList.find(
+      (existingProductItem: { title: string }) =>
+        existingProductItem.title === addedProduct.title
+    );
+
+    if (existingProduct) {
+      existingProduct.quantity++;
+    } else {
+      addedProduct.quantity = 1;
+      this.cartProductsList.push(addedProduct);
+    }
+
+    this.productList.next(this.cartProductsList.slice());
   }
 
-  addtoCart(product: any) {
-    this.cartItemList.push(product);
-    this.productList.next(this.cartItemList);
-    this.getTotalPrice();
-  }
-
-  getTotalPrice(): number {
-    let grandTotal = 0;
-    this.cartItemList.map((a: any) => {
-      grandTotal += a.total;
-    });
-    return grandTotal;
-  }
-
-  removeCartItem(product: any) {
-    for (let i = this.cartItemList.length - 1; i >= 0; i--) {
-      if (product.id === this.cartItemList[i].id) {
-        this.cartItemList.splice(i, 1);
+  removeCartProduct(product: Product) {
+    for (let i = this.cartProductsList.length - 1; i >= 0; i--) {
+      if (product.id === this.cartProductsList[i].id) {
+        this.cartProductsList.splice(i, 1);
         break;
       }
     }
-    this.productList.next(this.cartItemList);
+    this.productList.next(this.cartProductsList);
+  }
+
+  getTotalPrice(): number {
+    let totalPrice = 0;
+    this.cartProductsList.forEach((product: Product) => {
+      const productsTotalPrice = product.price * product.quantity;
+      totalPrice += productsTotalPrice;
+    });
+    console.log('TOTAL PRICE');
+    return totalPrice;
   }
 
   removeAllCart() {
-    this.cartItemList = [];
-    this.productList.next(this.cartItemList);
+    this.cartProductsList = [];
+    this.productList.next(this.cartProductsList);
   }
 }

@@ -19,7 +19,7 @@
                             Comanda mea
                         </span>
                         <div class="badge bg-danger m-2">
-                            Produse: {{totalItem}}
+                            Produse: {{totalNumberOfProducts}}
                         </div>
                     </i>
 
@@ -33,18 +33,18 @@
 <div class="container-fluid mb-4 px-2">
     <div class="card py-2 mx-4">
         <div class="container d-flex flex-wrap justify-content-around">
-            <ng-container *ngFor="let item of filteredProductList">
+            <ng-container *ngFor="let product of filteredProductList">
                 <div class="card product-card hover-card">
-                    <img src="{{item.image}}" class="card-img-top" alt="sample-product">
+                    <img src="{{product.image}}" class="card-img-top" alt="sample-product">
                     <div class="card-body">
-                        <h5 class="card-title">{{item.title}}</h5>
+                        <h5 class="card-title">{{product.title}}</h5>
                         <p class="card-text">
-                            {{item.description}}
+                            {{product.description}}
                         </p>
                         <p>
-                            <strong>Preț:</strong> {{item.price}} RON
+                            <strong>Preț:</strong> {{product.price}} RON
                         </p>
-                        <button class="btn btn-primary add-to-cart-btn" (click)=addtocart(item)>Adaugă la
+                        <button class="btn btn-primary add-to-cart-btn" (click)=addToCart(product)>Adaugă la
                             comandă</button>
                     </div>
                 </div>

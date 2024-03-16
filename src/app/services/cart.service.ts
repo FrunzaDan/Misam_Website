@@ -12,9 +12,9 @@ export class CartService {
 
   constructor() {}
 
-  getProductsForCart() {
-    let newProductList = this.getCartProductsFromLocalStorage();
-    this.cartProductsListBehaviorSubject.next(newProductList);
+  getProductsForCartObservable() {
+    let productList = this.getCartProductsFromLocalStorage();
+    this.cartProductsListBehaviorSubject.next(productList);
     return this.cartProductsListBehaviorSubject.asObservable();
   }
 
@@ -36,6 +36,7 @@ export class CartService {
   }
 
   removeCartProduct(product: Product) {
+    this.cartProductsList = this.getCartProductsFromLocalStorage();
     for (let i = this.cartProductsList.length - 1; i >= 0; i--) {
       if (product.id === this.cartProductsList[i].id) {
         this.cartProductsList.splice(i, 1);
@@ -48,10 +49,13 @@ export class CartService {
 
   getTotalPrice(): number {
     let totalPrice = 0;
+    this.cartProductsList = this.getCartProductsFromLocalStorage();
     this.cartProductsList.forEach((product: Product) => {
       const productsTotalPrice = product.price * product.quantity;
       totalPrice += productsTotalPrice;
     });
+    totalPrice = Math.round(totalPrice * 100) / 100;
+    this.updateLocalStorage(this.cartProductsList);
     return totalPrice;
   }
 

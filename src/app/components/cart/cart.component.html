@@ -1,4 +1,4 @@
-<ng-container *ngIf="products.length != 0">
+<ng-container *ngIf="cartProducts.length != 0">
     <div class="container" style="overflow-x:auto;">
         <div class="row">
             <table class="table">
@@ -12,7 +12,7 @@
                     </tr>
                 </thead>
                 <tbody class="table-group-divider">
-                    <tr *ngFor="let product of products; let i = index">
+                    <tr *ngFor="let product of cartProducts; let i = index">
                         <td valign="middle">{{product.title}}</td>
                         <td valign="middle"><img src="{{product.image}}" alt="product-image" class="table-product-img">
                         </td>
@@ -58,7 +58,7 @@
 </ng-container>
 
 
-<ng-container *ngIf="products.length == 0">
+<ng-container *ngIf="cartProducts.length == 0">
     <div class="container">
         <div class="card empty-cart-card">
             <div class="row d-flex justify-content-center align-items-center text-center">

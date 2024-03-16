@@ -15,37 +15,43 @@ import { Product } from '../../interfaces/product';
   styleUrl: './products.component.css',
 })
 export class ProductsComponent implements OnInit {
-  public productList: Product[] = [];
+  public productsList: Product[] = [];
   public totalNumberOfProducts: number = 0;
   public totalPrice: number = 0;
   public searchString: string = '';
   public filteredProductList: Product[] = [];
 
   constructor(
-    private api: FetchProductsService,
+    private fetchProductsService: FetchProductsService,
     private cartService: CartService,
     private filter: FilterPipe
   ) {}
 
   ngOnInit(): void {
-    this.api.getProductsForDisplay().subscribe((productsList: Product[]) => {
-      this.productList = productsList;
-      this.filteredProductList = this.productList;
-      this.productList.forEach((a: Product) => {
-        Object.assign(a, { quantity: a.quantity, total: a.price });
-      });
-    });
+    this.displayProductsContent();
+    this.displayNumberOfProductsForCart();
+  }
 
-    this.cartService
-      .getProductsForCart()
-      .subscribe((productsList: Product[]) => {
-        this.totalNumberOfProducts = productsList.reduce(
-          (totalQuantity, product) => {
-            return totalQuantity + product.quantity;
-          },
-          0
-        );
+  displayProductsContent() {
+    this.fetchProductsService
+      .getProductsForDisplay()
+      .subscribe((productList) => {
+        this.productsList = productList;
+        this.filteredProductList = this.productsList;
+        this.productsList.forEach((a: Product) => {
+          Object.assign(a, { quantity: a.quantity, total: a.price });
+        });
       });
+  }
+  displayNumberOfProductsForCart() {
+    this.cartService.getProductsForCartObservable().subscribe((productList) => {
+      this.totalNumberOfProducts = productList.reduce(
+        (totalQuantity, product) => {
+          return totalQuantity + product.quantity;
+        },
+        0
+      );
+    });
   }
 
   addToCart(product: Product) {
@@ -55,7 +61,7 @@ export class ProductsComponent implements OnInit {
   search(event: Event) {
     const searchString = (event.target as HTMLInputElement).value;
     this.filteredProductList = searchString
-      ? this.filter.transform(this.productList, searchString, 'title')
-      : this.productList;
+      ? this.filter.transform(this.productsList, searchString, 'title')
+      : this.productsList;
   }
 }

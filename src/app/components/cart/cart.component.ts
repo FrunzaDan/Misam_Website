@@ -12,19 +12,24 @@ import { Product } from '../../interfaces/product';
   styleUrl: './cart.component.css',
 })
 export class CartComponent implements OnInit {
-  public products: Product[] = [];
+  public cartProducts: Product[] = [];
   public totalPrice!: number;
   constructor(private cartService: CartService) {}
 
   ngOnInit(): void {
-    this.cartService.getProductsForCart().subscribe((res) => {
-      this.products = res;
-      this.totalPrice = this.cartService.getTotalPrice();
+    this.displayCartContent();
+  }
+
+  displayCartContent() {
+    this.cartService.getProductsForCartObservable().subscribe((res) => {
+      this.cartProducts = res;
     });
+    this.totalPrice = this.cartService.getTotalPrice();
   }
 
   removeFromCart(product: Product) {
     this.cartService.removeCartProduct(product);
+    this.totalPrice = this.cartService.getTotalPrice();
   }
 
   emptycart() {

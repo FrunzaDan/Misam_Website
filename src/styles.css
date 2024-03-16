@@ -71,6 +71,7 @@ a:active {
 
 .card {
     border: none;
+    border-radius: 1rem;
     color: white;
     background: linear-gradient(-45deg,
             rgba(var(--main-red-for-alpha), 0.9),
@@ -79,8 +80,17 @@ a:active {
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
+.card-img-top {
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
+}
+
 .no-italics {
     font-style: normal;
+}
+
+.text-color-red {
+    color: var(--red);
 }
 
 .form-control {
@@ -104,6 +114,19 @@ a:active {
     position: relative;
     transition: all .2s;
     transform-origin: 50% 50%;
+}
+
+.SAL-SOL {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    width: 20rem;
+    text-align: center;
+    position: relative;
+    transition: all .2s;
+    transform-origin: 50% 50%;
+    filter: drop-shadow(4px 4px var(--violet)) drop-shadow(4px 4px var(--red));
 }
 
 @media (pointer: fine) {
@@ -142,6 +165,11 @@ a:active {
         border-color: var(--white) !important;
         color: var(--white) !important;
     }
+
+    .SAL-SOL:hover {
+        transform: scale(1.04);
+        filter: drop-shadow(6px 6px var(--violet)) drop-shadow(6px 6px var(--red));
+    }
 }
 
 @media (hover: none),
@@ -168,5 +196,9 @@ a:active {
         background-color: var(--white) !important;
         border-color: var(--violet) !important;
         color: var(--red) !important;
+    }
+
+    .SAL-SOL:active {
+        transform: scale(1.04);
     }
 }

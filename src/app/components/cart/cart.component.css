@@ -22,7 +22,12 @@ h6 {
 }
 
 .table {
+    border: 2px var(--red) solid;
+    border-spacing: 0;
+    border-collapse: separate;
     table-layout: fixed;
+    border-radius: 10px;
+    background-color: white;
 }
 
 th {
@@ -35,6 +40,11 @@ td {
 
 .cart-img {
     filter: brightness(0) invert(1);
+}
+
+.table-product-img {
+    border-radius: 10px;
+    border: 2px var(--red) solid;
 }
 
 @media (min-width: 576px) {

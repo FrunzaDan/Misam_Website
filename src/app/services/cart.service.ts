@@ -29,8 +29,8 @@ export class CartService {
       addedProduct.quantity = 1;
       this.cartProductsList.push(addedProduct);
     }
-
     this.productList.next(this.cartProductsList.slice());
+    this.updateLocalStorage(this.cartProductsList);
   }
 
   removeCartProduct(product: Product) {
@@ -41,6 +41,7 @@ export class CartService {
       }
     }
     this.productList.next(this.cartProductsList);
+    this.updateLocalStorage(this.cartProductsList);
   }
 
   getTotalPrice(): number {
@@ -49,12 +50,30 @@ export class CartService {
       const productsTotalPrice = product.price * product.quantity;
       totalPrice += productsTotalPrice;
     });
-    console.log('TOTAL PRICE');
     return totalPrice;
   }
 
   removeAllCart() {
     this.cartProductsList = [];
     this.productList.next(this.cartProductsList);
+    this.updateLocalStorage(this.cartProductsList);
+  }
+
+  updateLocalStorage(produList: Product[]) {
+    localStorage.setItem('cartProducts', JSON.stringify(produList));
+  }
+
+  getCartProductsFromLocalStorage() {
+    try {
+      const cartProductsJson = localStorage.getItem('cartProducts');
+      if (cartProductsJson) {
+        return JSON.parse(cartProductsJson) as Product[];
+      } else {
+        return [];
+      }
+    } catch (error) {
+      console.error('Error getting cart products from local storage:', error);
+      return [];
+    }
   }
 }

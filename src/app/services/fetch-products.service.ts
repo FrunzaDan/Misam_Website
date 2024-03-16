@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
 export class FetchProductsService {
   constructor(private http: HttpClient) {}
 
-  getProduct(): Observable<Product[]> {
+  getProductsForDisplay(): Observable<Product[]> {
     return this.http
       .get<Product[]>('../../assets/products.json')
       .pipe(map((products: Product[]) => products));

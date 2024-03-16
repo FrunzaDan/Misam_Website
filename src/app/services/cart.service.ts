@@ -7,17 +7,19 @@ import { Product } from '../interfaces/product';
 })
 export class CartService {
   public cartProductsList: Product[] = [];
-  public productList: BehaviorSubject<Product[]> = new BehaviorSubject<
-    Product[]
-  >([]);
+  public cartProductsListBehaviorSubject: BehaviorSubject<Product[]> =
+    new BehaviorSubject<Product[]>([]);
 
   constructor() {}
 
   getProductsForCart() {
-    return this.productList.asObservable();
+    let newProductList = this.getCartProductsFromLocalStorage();
+    this.cartProductsListBehaviorSubject.next(newProductList);
+    return this.cartProductsListBehaviorSubject.asObservable();
   }
 
   addCartProduct(addedProduct: Product) {
+    this.cartProductsList = this.getCartProductsFromLocalStorage();
     const existingProduct = this.cartProductsList.find(
       (existingProductItem: { title: string }) =>
         existingProductItem.title === addedProduct.title
@@ -29,7 +31,7 @@ export class CartService {
       addedProduct.quantity = 1;
       this.cartProductsList.push(addedProduct);
     }
-    this.productList.next(this.cartProductsList.slice());
+    this.cartProductsListBehaviorSubject.next(this.cartProductsList.slice());
     this.updateLocalStorage(this.cartProductsList);
   }
 
@@ -40,7 +42,7 @@ export class CartService {
         break;
       }
     }
-    this.productList.next(this.cartProductsList);
+    this.cartProductsListBehaviorSubject.next(this.cartProductsList);
     this.updateLocalStorage(this.cartProductsList);
   }
 
@@ -55,12 +57,12 @@ export class CartService {
 
   removeAllCart() {
     this.cartProductsList = [];
-    this.productList.next(this.cartProductsList);
+    this.cartProductsListBehaviorSubject.next(this.cartProductsList);
     this.updateLocalStorage(this.cartProductsList);
   }
 
-  updateLocalStorage(produList: Product[]) {
-    localStorage.setItem('cartProducts', JSON.stringify(produList));
+  updateLocalStorage(productList: Product[]) {
+    localStorage.setItem('cartProducts', JSON.stringify(productList));
   }
 
   getCartProductsFromLocalStorage() {

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { Product } from '../interfaces/product';
+import { LocalStorageService } from './localstorage.service';
 
 @Injectable({
   providedIn: 'root',
@@ -10,19 +11,20 @@ export class CartService {
   public cartProductsListBehaviorSubject: BehaviorSubject<Product[]> =
     new BehaviorSubject<Product[]>([]);
 
-  constructor() {}
+  private localStorageService: LocalStorageService;
 
-  getProductsForCartObservable() {
-    let productList = this.getCartProductsFromLocalStorage();
-    this.cartProductsListBehaviorSubject.next(productList);
+  constructor(localStorageService: LocalStorageService) {
+    this.localStorageService = localStorageService;
+    this.loadCartProductsFromLocalStorage();
+  }
+
+  getProductsForCartObservable(): Observable<Product[]> {
     return this.cartProductsListBehaviorSubject.asObservable();
   }
 
   addCartProduct(addedProduct: Product) {
-    this.cartProductsList = this.getCartProductsFromLocalStorage();
     const existingProduct = this.cartProductsList.find(
-      (existingProductItem: { title: string }) =>
-        existingProductItem.title === addedProduct.title
+      (item) => item.id === addedProduct.id
     );
 
     if (existingProduct) {
@@ -31,20 +33,19 @@ export class CartService {
       addedProduct.quantity = 1;
       this.cartProductsList.push(addedProduct);
     }
-    this.cartProductsListBehaviorSubject.next(this.cartProductsList.slice());
-    this.updateLocalStorage(this.cartProductsList);
+
+    this.updateCartStateAndStorage();
   }
 
   removeCartProduct(product: Product) {
-    this.cartProductsList = this.getCartProductsFromLocalStorage();
-    for (let i = this.cartProductsList.length - 1; i >= 0; i--) {
-      if (product.id === this.cartProductsList[i].id) {
-        this.cartProductsList.splice(i, 1);
-        break;
-      }
+    const productIndex = this.cartProductsList.findIndex(
+      (item) => item.id === product.id
+    );
+
+    if (productIndex !== -1) {
+      this.cartProductsList.splice(productIndex, 1);
+      this.updateCartStateAndStorage();
     }
-    this.cartProductsListBehaviorSubject.next(this.cartProductsList);
-    this.updateLocalStorage(this.cartProductsList);
   }
 
   getTotalPrice(): BehaviorSubject<number> {
@@ -86,28 +87,19 @@ export class CartService {
 
   removeAllCart() {
     this.cartProductsList = [];
-    this.cartProductsListBehaviorSubject.next(this.cartProductsList);
-    this.updateLocalStorage(this.cartProductsList);
+    this.updateCartStateAndStorage();
   }
 
-  updateLocalStorage(productList: Product[]) {
-    localStorage.setItem('cartProducts', JSON.stringify(productList));
+  private updateCartStateAndStorage() {
+    this.cartProductsListBehaviorSubject.next(this.cartProductsList.slice());
+    this.localStorageService.setCartProducts(this.cartProductsList);
   }
 
-  getCartProductsFromLocalStorage(): Product[] {
-    try {
-      const cartProductsJson = localStorage.getItem('cartProducts');
-      if (!cartProductsJson) {
-        return [];
-      }
-      return JSON.parse(cartProductsJson) as Product[];
-    } catch (parseError: unknown) {
-      // Use a broader type for unknown errors
-      console.error(
-        'Error parsing cart products from local storage:',
-        parseError
-      );
-      return [];
+  private loadCartProductsFromLocalStorage() {
+    const products = this.localStorageService.getCartProducts();
+    if (products) {
+      this.cartProductsList = products;
+      this.cartProductsListBehaviorSubject.next(this.cartProductsList);
     }
   }
 }

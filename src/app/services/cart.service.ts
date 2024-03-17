@@ -82,4 +82,17 @@ export class CartService {
       return [];
     }
   }
+
+  getNumberOfProductsForCart() {
+    let cartProductNumberBehaviorSubject: BehaviorSubject<number> =
+      new BehaviorSubject<number>(0);
+
+    this.getProductsForCartObservable().subscribe((productList) => {
+      const totalQuantity = productList.reduce((totalQuantity, product) => {
+        return totalQuantity + product.quantity;
+      }, 0);
+      cartProductNumberBehaviorSubject.next(totalQuantity);
+    });
+    return cartProductNumberBehaviorSubject;
+  }
 }

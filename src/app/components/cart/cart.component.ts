@@ -13,18 +13,28 @@ import { Product } from '../../interfaces/product';
 })
 export class CartComponent implements OnInit {
   public cartProducts: Product[] = [];
+  public totalNumberOfCartProducts!: number;
   public totalPrice!: number;
   constructor(private cartService: CartService) {}
 
   ngOnInit(): void {
     this.displayCartContent();
+    this.displayTotalNumberOfCartProducts();
+    this.displayTotalPrice();
   }
 
   displayCartContent() {
     this.cartService.getProductsForCartObservable().subscribe((res) => {
       this.cartProducts = res;
     });
+  }
+
+  displayTotalPrice() {
     this.totalPrice = this.cartService.getTotalPrice();
+  }
+
+  displayTotalNumberOfCartProducts() {
+    this.totalNumberOfCartProducts = this.cartService.getTotalPrice();
   }
 
   removeFromCart(product: Product) {
@@ -32,7 +42,7 @@ export class CartComponent implements OnInit {
     this.totalPrice = this.cartService.getTotalPrice();
   }
 
-  emptycart() {
+  emptyCart() {
     this.cartService.removeAllCart();
   }
 }

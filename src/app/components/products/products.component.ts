@@ -16,7 +16,7 @@ import { Product } from '../../interfaces/product';
 })
 export class ProductsComponent implements OnInit {
   public productsList: Product[] = [];
-  public totalNumberOfProducts: number = 0;
+  public totalNumberOfCartProducts: number = 0;
   public totalPrice: number = 0;
   public searchString: string = '';
   public filteredProductList: Product[] = [];
@@ -43,23 +43,21 @@ export class ProductsComponent implements OnInit {
         });
       });
   }
+
   displayNumberOfProductsForCart() {
-    this.cartService.getProductsForCartObservable().subscribe((productList) => {
-      this.totalNumberOfProducts = productList.reduce(
-        (totalQuantity, product) => {
-          return totalQuantity + product.quantity;
-        },
-        0
-      );
-    });
+    this.cartService
+      .getNumberOfProductsForCart()
+      .subscribe((totalNumberOfProducts) => {
+        this.totalNumberOfCartProducts = totalNumberOfProducts;
+      });
   }
 
   addToCart(product: Product) {
     this.cartService.addCartProduct(product);
   }
 
-  search(event: Event) {
-    const searchString = (event.target as HTMLInputElement).value;
+  search(keyboardEvent: Event) {
+    const searchString = (keyboardEvent.target as HTMLInputElement).value;
     this.filteredProductList = searchString
       ? this.filter.transform(this.productsList, searchString, 'title')
       : this.productsList;

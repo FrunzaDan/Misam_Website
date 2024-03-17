@@ -30,16 +30,24 @@ export class CartComponent implements OnInit {
   }
 
   displayTotalPrice() {
-    this.totalPrice = this.cartService.getTotalPrice();
+    this.cartService.getTotalPrice().subscribe((totalPriceCalculated) => {
+      this.totalPrice = totalPriceCalculated;
+    });
   }
 
   displayTotalNumberOfCartProducts() {
-    this.totalNumberOfCartProducts = this.cartService.getTotalPrice();
+    this.cartService
+      .getNumberOfProductsForCart()
+      .subscribe((totalNumberOfProducts) => {
+        this.totalNumberOfCartProducts = totalNumberOfProducts;
+      });
   }
 
   removeFromCart(product: Product) {
     this.cartService.removeCartProduct(product);
-    this.totalPrice = this.cartService.getTotalPrice();
+    this.cartService.getTotalPrice().subscribe((totalPriceCalculated) => {
+      this.totalPrice = totalPriceCalculated;
+    });
   }
 
   emptyCart() {

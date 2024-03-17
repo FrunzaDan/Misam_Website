@@ -47,16 +47,41 @@ export class CartService {
     this.updateLocalStorage(this.cartProductsList);
   }
 
-  getTotalPrice(): number {
-    let totalPrice = 0;
-    this.cartProductsList = this.getCartProductsFromLocalStorage();
-    this.cartProductsList.forEach((product: Product) => {
-      const productsTotalPrice = product.price * product.quantity;
-      totalPrice += productsTotalPrice;
+  getTotalPrice(): BehaviorSubject<number> {
+    const cartTotalPriceBehaviorSubject = new BehaviorSubject<number>(0);
+
+    this.getProductsForCartObservable().subscribe((cartProductsList) => {
+      let totalPrice = 0;
+      if (cartProductsList && cartProductsList.length > 0) {
+        cartProductsList.forEach((cartProduct: Product) => {
+          const totalPricePerProduct = cartProduct.price * cartProduct.quantity;
+          totalPrice += totalPricePerProduct;
+        });
+        totalPrice = Math.round(totalPrice * 100) / 100;
+      }
+      cartTotalPriceBehaviorSubject.next(totalPrice);
     });
-    totalPrice = Math.round(totalPrice * 100) / 100;
-    this.updateLocalStorage(this.cartProductsList);
-    return totalPrice;
+
+    return cartTotalPriceBehaviorSubject;
+  }
+
+  getNumberOfProductsForCart() {
+    const cartProductNumberBehaviorSubject = new BehaviorSubject<number>(0);
+
+    this.getProductsForCartObservable().subscribe((cartProductsList) => {
+      if (!cartProductsList || cartProductsList.length === 0) {
+        cartProductNumberBehaviorSubject.next(0);
+        return;
+      }
+
+      const totalItemsInCart = cartProductsList.reduce(
+        (totalQuantity, cartProduct) => totalQuantity + cartProduct.quantity,
+        0
+      );
+      cartProductNumberBehaviorSubject.next(totalItemsInCart);
+    });
+
+    return cartProductNumberBehaviorSubject;
   }
 
   removeAllCart() {
@@ -69,30 +94,20 @@ export class CartService {
     localStorage.setItem('cartProducts', JSON.stringify(productList));
   }
 
-  getCartProductsFromLocalStorage() {
+  getCartProductsFromLocalStorage(): Product[] {
     try {
       const cartProductsJson = localStorage.getItem('cartProducts');
-      if (cartProductsJson) {
-        return JSON.parse(cartProductsJson) as Product[];
-      } else {
+      if (!cartProductsJson) {
         return [];
       }
-    } catch (error) {
-      console.error('Error getting cart products from local storage:', error);
+      return JSON.parse(cartProductsJson) as Product[];
+    } catch (parseError: unknown) {
+      // Use a broader type for unknown errors
+      console.error(
+        'Error parsing cart products from local storage:',
+        parseError
+      );
       return [];
     }
-  }
-
-  getNumberOfProductsForCart() {
-    let cartProductNumberBehaviorSubject: BehaviorSubject<number> =
-      new BehaviorSubject<number>(0);
-
-    this.getProductsForCartObservable().subscribe((productList) => {
-      const totalQuantity = productList.reduce((totalQuantity, product) => {
-        return totalQuantity + product.quantity;
-      }, 0);
-      cartProductNumberBehaviorSubject.next(totalQuantity);
-    });
-    return cartProductNumberBehaviorSubject;
   }
 }

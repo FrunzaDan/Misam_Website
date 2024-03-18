@@ -1,3 +1,4 @@
+<div class="container p-4"></div>
 <div class="container-fluid mb-4 px-2 pb-2">
     <div class="card px-2 mx-4">
         <div class="row justify-content-center align-items-center pt-2 mt-2">
@@ -13,7 +14,7 @@
             </div>
             <div class="col-md justify-content-center align-items-center text-center p-1 m-2">
                 <button routerLink="../cart"
-                    class="btn btn-primary d-flex cart-button justify-content-center align-items-center text-center">
+                    class="btn btn-primary d-flex button-width-100prc justify-content-center align-items-center text-center">
                     <i class="bi bi-cart no-italics comanda-mea">
                         <span class="ps-2">
                             Comanda mea
@@ -32,8 +33,32 @@
 
 <div class="container-fluid mb-4 px-2">
     <div class="card py-2 mx-4">
+        <div class="container">
+            <div class="row px-2 py-4">
+                <div class="col d-flex justify-content-center align-items-center p-2">
+                    <button class="btn btn-secondary h-100" (click)="displayProductsContent()"
+                        [ngClass]="{ 'selected-btn': !selectedCategory }">Toate</button>
+                </div>
+                <div class="col d-flex justify-content-center align-items-center p-2">
+                    <button class="btn btn-secondary h-100" (click)="onCategorySelect('bakeries')"
+                        [ngClass]="{ 'selected-btn': selectedCategory === 'bakeries' }">Cofetărie</button>
+                </div>
+                <div class="col d-flex justify-content-center align-items-center p-2">
+                    <button class="btn btn-secondary h-100" (click)="onCategorySelect('pastry')"
+                        [ngClass]="{ 'selected-btn': selectedCategory === 'pastry' }">Patiserie</button>
+                </div>
+                <div class="col d-flex justify-content-center align-items-center p-2">
+                    <button class="btn btn-secondary h-100" (click)="onCategorySelect('sweets')"
+                        [ngClass]="{ 'selected-btn': selectedCategory === 'sweets' }">Torturi</button>
+                </div>
+                <div class="col d-flex justify-content-center align-items-center p-2">
+                    <button class="btn btn-secondary h-100" (click)="onCategorySelect('basic_products')"
+                        [ngClass]="{ 'selected-btn': selectedCategory === 'basic_products' }">Produse de bază</button>
+                </div>
+            </div>
+        </div>
         <div class="container d-flex flex-wrap justify-content-around">
-            <ng-container *ngFor="let product of filteredProductList">
+            <ng-container *ngFor="let product of searchFilterProductsList">
                 <div class="card product-card hover-card">
                     <img src="{{product.image}}" class="card-img-top" alt="sample-product">
                     <div class="card-body">
@@ -49,7 +74,7 @@
                     </div>
                 </div>
             </ng-container>
-            <ng-container *ngIf="filteredProductList?.length == 0">
+            <ng-container *ngIf="searchFilterProductsList?.length == 0">
                 <div class="container text-center my-4 py-4">
                     Nu există produse disponibile conform filtrului aplicat. <br>
                     Încearcă să cauți altceva. <br>
@@ -58,3 +83,4 @@
         </div>
     </div>
 </div>
+<div class="container m-4 p-4"></div>

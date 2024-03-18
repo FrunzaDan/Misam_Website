@@ -21,6 +21,10 @@
     color: var(--white) !important;
 }
 
+.selected-btn {
+    box-shadow: 0.2rem 0.5rem 1rem rgba(255, 255, 255, .8);
+}
+
 *,
 *::before,
 *::after {
@@ -96,6 +100,14 @@ a:active {
 .form-control {
     border: 1px solid var(--red);
 
+}
+
+.text-color-white {
+    color: var(--white) !important;
+}
+
+.button-width-100prc {
+    width: 100%;
 }
 
 .hover-logo {

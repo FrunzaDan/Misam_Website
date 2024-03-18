@@ -13,9 +13,7 @@
     color: var(--red);
 }
 
-
-
-.cart-button {
+.button-width-100prc {
     width: 100%;
 }
 

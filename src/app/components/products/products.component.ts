@@ -19,7 +19,8 @@ export class ProductsComponent implements OnInit {
   public totalNumberOfCartProducts: number = 0;
   public totalPrice: number = 0;
   public searchString: string = '';
-  public filteredProductList: Product[] = [];
+  public searchFilterProductsList: Product[] = [];
+  selectedCategory: string | undefined;
 
   constructor(
     private fetchProductsService: FetchProductsService,
@@ -32,16 +33,33 @@ export class ProductsComponent implements OnInit {
     this.displayNumberOfProductsForCart();
   }
 
-  displayProductsContent() {
+  displayProductsContent(selectedCategory?: string) {
+    if (!selectedCategory) {
+      this.selectedCategory = undefined;
+    }
     this.fetchProductsService
       .getProductsForDisplay()
       .subscribe((productList) => {
         this.productsList = productList;
-        this.filteredProductList = this.productsList;
-        this.productsList.forEach((a: Product) => {
+        this.searchFilterProductsList = this.productsList;
+
+        if (selectedCategory) {
+          this.searchFilterProductsList = this.productsList.filter(
+            (product) => product.category === selectedCategory
+          );
+        } else {
+          this.searchFilterProductsList = this.productsList;
+        }
+
+        this.searchFilterProductsList.forEach((a: Product) => {
           Object.assign(a, { quantity: a.quantity, total: a.price });
         });
       });
+  }
+
+  onCategorySelect(category: string) {
+    this.selectedCategory = category;
+    this.displayProductsContent(this.selectedCategory);
   }
 
   displayNumberOfProductsForCart() {
@@ -58,7 +76,7 @@ export class ProductsComponent implements OnInit {
 
   search(keyboardEvent: Event) {
     const searchString = (keyboardEvent.target as HTMLInputElement).value;
-    this.filteredProductList = searchString
+    this.searchFilterProductsList = searchString
       ? this.filter.transform(this.productsList, searchString, 'title')
       : this.productsList;
   }

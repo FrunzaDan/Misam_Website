@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Product } from '../interfaces/product';
+import { createCipheriv, createDecipheriv } from 'crypto';
 
 @Injectable({
   providedIn: 'root',

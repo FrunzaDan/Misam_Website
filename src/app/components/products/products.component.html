@@ -36,23 +36,24 @@
         <div class="container">
             <div class="row px-2 py-4">
                 <div class="col d-flex justify-content-center align-items-center p-2">
-                    <button class="btn btn-secondary h-100" (click)="displayProductsContent()"
+                    <button class="btn btn-secondary button-width-100prc h-100" (click)="displayProductsContent()"
                         [ngClass]="{ 'selected-btn': !selectedCategory }">Toate</button>
                 </div>
                 <div class="col d-flex justify-content-center align-items-center p-2">
-                    <button class="btn btn-secondary h-100" (click)="onCategorySelect('bakeries')"
+                    <button class="btn btn-secondary button-width-100prc h-100" (click)="onCategorySelect('bakeries')"
                         [ngClass]="{ 'selected-btn': selectedCategory === 'bakeries' }">Cofetărie</button>
                 </div>
                 <div class="col d-flex justify-content-center align-items-center p-2">
-                    <button class="btn btn-secondary h-100" (click)="onCategorySelect('pastry')"
+                    <button class="btn btn-secondary button-width-100prc h-100" (click)="onCategorySelect('pastry')"
                         [ngClass]="{ 'selected-btn': selectedCategory === 'pastry' }">Patiserie</button>
                 </div>
                 <div class="col d-flex justify-content-center align-items-center p-2">
-                    <button class="btn btn-secondary h-100" (click)="onCategorySelect('sweets')"
+                    <button class="btn btn-secondary button-width-100prc h-100" (click)="onCategorySelect('sweets')"
                         [ngClass]="{ 'selected-btn': selectedCategory === 'sweets' }">Torturi</button>
                 </div>
                 <div class="col d-flex justify-content-center align-items-center p-2">
-                    <button class="btn btn-secondary h-100" (click)="onCategorySelect('basic_products')"
+                    <button class="btn btn-secondary button-width-100prc h-100"
+                        (click)="onCategorySelect('basic_products')"
                         [ngClass]="{ 'selected-btn': selectedCategory === 'basic_products' }">Produse de bază</button>
                 </div>
             </div>
@@ -84,3 +85,9 @@
     </div>
 </div>
 <div class="container m-4 p-4"></div>
+
+<!-- <app-notification *ngIf="currentNotifications" [notification]="currentNotifications"></app-notification> -->
+
+<div class="notifications-container">
+    <app-notification *ngFor="let notification of notifications" [notification]="notification"></app-notification>
+</div>

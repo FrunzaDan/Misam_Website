@@ -1,9 +1,12 @@
 <div class="container p-4"></div>
 <div class="container-fluid mb-4 px-2">
-    <div class="card p-2 mx-4">
-        <div class="row align-items-center p-2 m-2">
-            <h2 class="p-4 text-center">
-                Plasează comanda ta de ... produse în valoare totală de ... RON și te vom contacta noi:
+    <div class="card p-2 mx-4 ">
+        <div class="row align-items-center p-1 m-1 p-sm-4 m-sm-4">
+            <h2 class="text-center p-4">
+                Plasează comanda ta de {{totalNumberOfCartProducts}} produs(e) în valoare totală de {{totalPrice}} RON
+                și
+                te vom contacta noi. Pentru a intra în legătură cu tine, avem nevoie de datele tale de contact și de
+                adresa de livrare:
             </h2>
             <form>
                 <div class="mb-4">
@@ -14,48 +17,46 @@
                     <label for="email" class="form-label">E-mail:</label>
                     <input type="email" class="form-control" id="email" aria-describedby="emailHelp"
                         placeholder="Adresa ta de E-mail" required>
-                    <div id="emailHelp" class="form-text text-muted text-color-white">Nu îți stocăm nicăieri adresa de
-                        E-mail.
-                    </div>
                 </div>
                 <div class="mb-4">
                     <label for="phone" class="form-label">Telefon:</label>
                     <input type="tel" class="form-control" id="phone" placeholder="Numărul tău de telefon" required>
-                    <div class="form-text text-muted text-color-white">Nu îți stocăm nicăieri numărul de telefon.</div>
                 </div>
                 <div class="mb-1">
                     <label for="address" class="form-label">Adresă de livrare:</label>
                 </div>
                 <div class="mb-1">
                     <label for="address" class="form-label">Oraș/localitate din jurul Sibiului:</label>
-                    <input type="text" class="form-control" id="addressTown" placeholder="Localitate livrare" required>
+                    <input type="text" class="form-control" id="address-city" placeholder="Localitate livrare" required>
                 </div>
                 <div class="mb-1">
                     <label for="address" class="form-label">Stradă:</label>
-                    <input type="text" class="form-control" id="addressStreet" placeholder="Strada adresei de livrare"
+                    <input type="text" class="form-control" id="address-street" placeholder="Strada adresei de livrare"
                         required>
                 </div>
                 <div class="mb-1">
                     <label for="address" class="form-label">Număr:</label>
-                    <input type="text" class="form-control" id="addressNumber" placeholder="Numărul adresei de livrare"
+                    <input type="text" class="form-control" id="address-number" placeholder="Numărul adresei de livrare"
                         required>
                 </div>
                 <div class="mb-4">
                     <label for="address" class="form-label">Cod poștal:</label>
-                    <input type="text" class="form-control" id="addressZIP"
+                    <input type="text" class="form-control" id="address-postal-code"
                         placeholder="Codul poștal al adresei de livrare" required>
-                    <div class="form-text text-muted text-color-white">Nu îți stocăm nicăieri adresa.</div>
+                    <div class="form-text text-muted text-color-white">Nu îți stocăm nicăieri în browser numărul de
+                        telefon,
+                        E-mailul sau adresa.</div>
                 </div>
                 <div class="row justify-content-center align-items-center">
-                    <div class="col-sm align-items-center text-center">
+                    <div class="col-sm align-items-center text-center py-2">
                         <button (click)="handleBackToCartClick($event)"
-                            class="btn btn-primary button-width-100prc justify-content-center align-items-center text-center">Înapoi
+                            class="btn btn-primary button-width-100prc justify-content-center align-items-center text-center p-2 h-100">Înapoi
                             la comanda
                             mea detaliată</button>
                     </div>
-                    <div class="col-sm align-items-center text-center">
+                    <div class="col-sm align-items-center text-center py-2">
                         <button type="submit"
-                            class="btn btn-secondary button-width-100prc justify-content-center align-items-center text-center">Plasează
+                            class="btn btn-secondary button-width-100prc justify-content-center align-items-center text-center p-2 h-100">Plasează
                             comanda</button>
                     </div>
                 </div>

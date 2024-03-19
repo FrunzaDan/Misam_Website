@@ -10,8 +10,29 @@ import { Router } from '@angular/router';
   templateUrl: './checkout.component.html',
   styleUrl: './checkout.component.css',
 })
-export class CheckoutComponent {
+export class CheckoutComponent implements OnInit {
+  public totalNumberOfCartProducts!: number;
+  public totalPrice!: number;
   constructor(private cartService: CartService, private router: Router) {}
+
+  ngOnInit(): void {
+    this.displayTotalNumberOfCartProducts();
+    this.displayTotalPrice();
+  }
+
+  displayTotalPrice() {
+    this.cartService.getTotalPrice().subscribe((totalPriceCalculated) => {
+      this.totalPrice = totalPriceCalculated;
+    });
+  }
+
+  displayTotalNumberOfCartProducts() {
+    this.cartService
+      .getNumberOfProductsForCart()
+      .subscribe((totalNumberOfProducts) => {
+        this.totalNumberOfCartProducts = totalNumberOfProducts;
+      });
+  }
 
   handleBackToCartClick(event: Event) {
     event.preventDefault();

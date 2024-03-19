@@ -1,0 +1,28 @@
+.notification {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    padding: 10px 20px;
+    border-radius: 4px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    animation-fill-mode: forwards;
+    z-index: 9999;
+    color: var(--white);
+    opacity: 1;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.notification.success {
+    background-color: var(--violet);
+
+}
+
+.notification.error {
+    background-color: var(--red);
+    color: #a94442;
+}
+
+.notification.info {
+    background-color: var(--violet);
+    color: #31708f;
+}

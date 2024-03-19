@@ -6,10 +6,19 @@ import { CartService } from '../../services/cart.service';
 import { CommonModule } from '@angular/common';
 import { FilterPipe } from '../../shared/filter.pipe';
 import { Product } from '../../interfaces/product';
+import { Notification } from '../../interfaces/notification';
+import { NotificationService } from '../../services/notification.service';
+import { NotificationComponent } from '../notification/notification.component';
 
 @Component({
   standalone: true,
-  imports: [RouterModule, FormsModule, CommonModule, FilterPipe],
+  imports: [
+    RouterModule,
+    FormsModule,
+    CommonModule,
+    FilterPipe,
+    NotificationComponent,
+  ],
   selector: 'app-products',
   templateUrl: './products.component.html',
   styleUrl: './products.component.css',
@@ -21,16 +30,20 @@ export class ProductsComponent implements OnInit {
   public searchString: string = '';
   public searchFilterProductsList: Product[] = [];
   selectedCategory: string | undefined;
+  public currentNotifications: Notification | null = null;
+  public notifications: Notification[] = [];
 
   constructor(
     private fetchProductsService: FetchProductsService,
     private cartService: CartService,
-    private filter: FilterPipe
+    private filter: FilterPipe,
+    private notificationService: NotificationService
   ) {}
 
   ngOnInit(): void {
     this.displayProductsContent();
     this.displayNumberOfProductsForCart();
+    this.initializeNotifications();
   }
 
   displayProductsContent(selectedCategory?: string) {
@@ -57,11 +70,6 @@ export class ProductsComponent implements OnInit {
       });
   }
 
-  onCategorySelect(category: string) {
-    this.selectedCategory = category;
-    this.displayProductsContent(this.selectedCategory);
-  }
-
   displayNumberOfProductsForCart() {
     this.cartService
       .getNumberOfProductsForCart()
@@ -70,8 +78,24 @@ export class ProductsComponent implements OnInit {
       });
   }
 
+  initializeNotifications() {
+    this.notificationService.currentNotifications.subscribe(
+      (notifications) => (this.notifications = notifications)
+    );
+  }
+
+  onCategorySelect(category: string) {
+    this.selectedCategory = category;
+    this.displayProductsContent(this.selectedCategory);
+  }
+
   addToCart(product: Product) {
     this.cartService.addCartProduct(product);
+    let notification: Notification = {
+      type: 'success',
+      message: `"${product.title}" added to cart!`,
+    };
+    this.notifications.push(notification);
   }
 
   search(keyboardEvent: Event) {

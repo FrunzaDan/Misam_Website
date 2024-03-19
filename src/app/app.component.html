@@ -3,3 +3,7 @@
 <app-navbar></app-navbar>
 <router-outlet></router-outlet>
 <app-footer></app-footer>
+
+<div class="notifications-container">
+    <app-notification *ngFor="let notification of notifications" [notification]="notification"></app-notification>
+</div>

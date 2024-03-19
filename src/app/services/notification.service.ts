@@ -14,9 +14,18 @@ export class NotificationService {
   }
 
   removeNotification(notification: Notification) {
-    const updatedNotifications = this.notifications
-      .getValue()
-      .filter((n) => n !== notification);
-    this.notifications.next(updatedNotifications);
+    const currentNotifications = this.notifications.getValue();
+    const notificationIndex = currentNotifications.findIndex(
+      (n) => n === notification
+    );
+    if (notificationIndex !== -1) {
+      const updatedNotifications = [
+        ...currentNotifications.slice(0, notificationIndex),
+        ...currentNotifications.slice(notificationIndex + 1),
+      ];
+      this.notifications.next(updatedNotifications);
+    } else {
+      console.warn('Notification to remove not found');
+    }
   }
 }

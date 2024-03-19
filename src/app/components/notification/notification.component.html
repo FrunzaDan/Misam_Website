@@ -1,4 +1,4 @@
-<div *ngIf="activeNotification" class="card notification" [ngClass]="notification.type">
+<div class="card notification p-4 m-4" [ngClass]="notification.type">
     {{ notification.message }}
-    <button class="btn btn-primary" (click)="dismissNotification()">Ok</button>
+    <button class="btn btn-primary mt-4" (click)="dismissNotification()">Ok</button>
 </div>

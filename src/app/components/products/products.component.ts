@@ -8,17 +8,10 @@ import { FilterPipe } from '../../shared/filter.pipe';
 import { Product } from '../../interfaces/product';
 import { Notification } from '../../interfaces/notification';
 import { NotificationService } from '../../services/notification.service';
-import { NotificationComponent } from '../notification/notification.component';
 
 @Component({
   standalone: true,
-  imports: [
-    RouterModule,
-    FormsModule,
-    CommonModule,
-    FilterPipe,
-    NotificationComponent,
-  ],
+  imports: [RouterModule, FormsModule, CommonModule, FilterPipe],
   selector: 'app-products',
   templateUrl: './products.component.html',
   styleUrl: './products.component.css',

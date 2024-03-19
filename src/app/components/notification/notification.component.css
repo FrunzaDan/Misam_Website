@@ -1,15 +1,12 @@
 .notification {
     position: fixed;
-    bottom: 20px;
-    right: 20px;
-    padding: 10px 20px;
-    border-radius: 4px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    animation-fill-mode: forwards;
+    bottom: 2rem;
+    right: 2rem;
+    box-shadow: 0rem 0rem 2rem rgba(255, 255, 255, .8);
     z-index: 9999;
     color: var(--white);
     opacity: 1;
-    transition: opacity 0.3s ease-in-out;
+    transition: opacity 0.3s ease-in-out !important;
 }
 
 .notification.success {

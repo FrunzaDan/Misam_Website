@@ -36,7 +36,6 @@ export class ProductsComponent implements OnInit {
   ngOnInit(): void {
     this.displayProductsContent();
     this.displayNumberOfProductsForCart();
-    this.initializeNotifications();
   }
 
   displayProductsContent(selectedCategory?: string) {
@@ -71,12 +70,6 @@ export class ProductsComponent implements OnInit {
       });
   }
 
-  initializeNotifications() {
-    this.notificationService.currentNotifications.subscribe(
-      (notifications) => (this.notifications = notifications)
-    );
-  }
-
   onCategorySelect(category: string) {
     this.selectedCategory = category;
     this.displayProductsContent(this.selectedCategory);
@@ -85,10 +78,9 @@ export class ProductsComponent implements OnInit {
   addToCart(product: Product) {
     this.cartService.addCartProduct(product);
     let notification: Notification = {
-      type: 'success',
-      message: `"${product.title}" added to cart!`,
+      message: `"${product.title}" a fost adăugat!`,
     };
-    this.notifications.push(notification);
+    this.notificationService.addNotification(notification);
   }
 
   search(keyboardEvent: Event) {

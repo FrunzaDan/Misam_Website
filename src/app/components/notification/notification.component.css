@@ -9,17 +9,6 @@
     transition: opacity 0.3s ease-in-out !important;
 }
 
-.notification.success {
-    background-color: var(--violet);
-
-}
-
-.notification.error {
-    background-color: var(--red);
-    color: #a94442;
-}
-
-.notification.info {
-    background-color: var(--violet);
-    color: #31708f;
+.app .notification.hidden {
+    opacity: 0;
 }

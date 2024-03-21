@@ -25,7 +25,7 @@ import { NotificationComponent } from './components/notification/notification.co
 export class AppComponent implements OnInit {
   title = 'Misam';
 
-  public notifications: Notification[] = [];
+  public notificationsArray: Notification[] = [];
 
   constructor(private notificationService: NotificationService) {}
 
@@ -34,8 +34,6 @@ export class AppComponent implements OnInit {
   }
 
   initializeNotifications() {
-    this.notificationService.currentNotifications.subscribe(
-      (notifications) => (this.notifications = notifications)
-    );
+    this.notificationsArray = this.notificationService.getNotifications();
   }
 }

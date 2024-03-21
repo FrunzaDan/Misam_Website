@@ -15,6 +15,8 @@ export class NotificationComponent implements OnInit, OnDestroy {
   @Input()
   notification!: Notification;
   private timeoutId: ReturnType<typeof setTimeout> | null = null;
+  isVisible = true;
+
   constructor(private notificationService: NotificationService) {}
 
   ngOnInit() {
@@ -35,10 +37,13 @@ export class NotificationComponent implements OnInit, OnDestroy {
   }
 
   dismissNotification() {
-    if (this.timeoutId) {
-      clearTimeout(this.timeoutId);
-      this.timeoutId = null;
-      this.notificationService.removeNotification(this.notification);
-    }
+    this.isVisible = false;
+    setTimeout(() => {
+      if (this.timeoutId) {
+        clearTimeout(this.timeoutId);
+        this.timeoutId = null;
+        this.notificationService.removeNotification(this.notification);
+      }
+    }, 300);
   }
 }

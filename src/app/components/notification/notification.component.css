@@ -5,10 +5,29 @@
     box-shadow: 0rem 0rem 2rem rgba(255, 255, 255, .8);
     z-index: 9999;
     color: var(--white);
-    opacity: 1;
-    transition: opacity 0.3s ease-in-out !important;
+    animation: fadeIn 0.4s ease-in-out forwards;
 }
 
-.app .notification.hidden {
-    opacity: 0;
+.notification.remove {
+    animation: fadeOut 0.4s ease-in-out forwards;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
 }

@@ -6,22 +6,22 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root',
 })
 export class NotificationService {
-  private notifications: Notification[] = [];
+  private notificationsArray: Notification[] = [];
 
   getNotifications(): Notification[] {
-    return this.notifications;
+    return this.notificationsArray;
   }
 
   addNotification(notification: Notification) {
-    this.notifications.push(notification);
+    this.notificationsArray.push(notification);
   }
 
   removeNotification(notification: Notification) {
-    const notificationIndex = this.notifications.findIndex(
+    const notificationIndex = this.notificationsArray.findIndex(
       (n) => n === notification
     );
     if (notificationIndex !== -1) {
-      this.notifications.splice(notificationIndex, 1);
+      this.notificationsArray.splice(notificationIndex, 1);
     } else {
       console.warn('Notification to remove not found');
     }

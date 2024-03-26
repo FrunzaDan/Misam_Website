@@ -6,24 +6,26 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root',
 })
 export class NotificationService {
-  private notificationsArray: Notification[] = [];
+  private notificationsSubject = new BehaviorSubject<Notification[]>([]);
 
-  getNotifications(): Notification[] {
-    return this.notificationsArray;
+  get notifications$(): BehaviorSubject<Notification[]> {
+    return this.notificationsSubject;
   }
 
   addNotification(notification: Notification) {
-    this.notificationsArray.push(notification);
+    const currentNotifications = this.notificationsSubject.getValue();
+    this.notificationsSubject.next([...currentNotifications, notification]);
   }
 
   removeNotification(notification: Notification) {
-    const notificationIndex = this.notificationsArray.findIndex(
-      (n) => n === notification
-    );
-    if (notificationIndex !== -1) {
-      this.notificationsArray.splice(notificationIndex, 1);
-    } else {
-      console.warn('Notification to remove not found');
+    const index = this.notificationsSubject
+      .getValue()
+      .findIndex((n) => n === notification);
+    if (index !== -1) {
+      this.notificationsSubject.next([
+        ...this.notificationsSubject.getValue().slice(0, index),
+        ...this.notificationsSubject.getValue().slice(index + 1),
+      ]);
     }
   }
 }

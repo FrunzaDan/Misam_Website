@@ -22,22 +22,24 @@ export class CartService {
     return this.cartProductsListBehaviorSubject.asObservable();
   }
 
-  addCartProduct(addedProduct: Product) {
+  addCartProduct(addedProduct: Product): boolean {
     const existingProduct = this.cartProductsList.find(
       (item) => item.id === addedProduct.id
     );
 
     if (existingProduct) {
       existingProduct.quantity++;
+      this.updateCartStateAndStorage();
+      return true;
     } else {
       addedProduct.quantity = 1;
       this.cartProductsList.push(addedProduct);
+      this.updateCartStateAndStorage();
+      return true;
     }
-
-    this.updateCartStateAndStorage();
   }
 
-  removeCartProduct(product: Product) {
+  removeCartProduct(product: Product): boolean {
     const productIndex = this.cartProductsList.findIndex(
       (item) => item.id === product.id
     );
@@ -45,7 +47,10 @@ export class CartService {
     if (productIndex !== -1) {
       this.cartProductsList.splice(productIndex, 1);
       this.updateCartStateAndStorage();
+      return true;
     }
+
+    return false;
   }
 
   getTotalPrice(): BehaviorSubject<number> {
@@ -85,9 +90,10 @@ export class CartService {
     return cartProductNumberBehaviorSubject;
   }
 
-  removeAllCart() {
+  removeAllCart(): boolean {
     this.cartProductsList = [];
     this.updateCartStateAndStorage();
+    return true;
   }
 
   private updateCartStateAndStorage() {

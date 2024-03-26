@@ -76,11 +76,13 @@ export class ProductsComponent implements OnInit {
   }
 
   addToCart(product: Product) {
-    this.cartService.addCartProduct(product);
-    let notification: Notification = {
-      message: `"${product.title}" a fost adăugat!`,
-    };
-    this.notificationService.addNotification(notification);
+    let isSuccesful = this.cartService.addCartProduct(product);
+    if (isSuccesful) {
+      let notification: Notification = {
+        message: `"${product.title}" a fost adăugat!`,
+      };
+      this.notificationService.addNotification(notification);
+    }
   }
 
   search(keyboardEvent: Event) {

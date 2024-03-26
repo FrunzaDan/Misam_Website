@@ -7,6 +7,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { Notification } from './interfaces/notification';
 import { NotificationService } from './services/notification.service';
 import { NotificationComponent } from './components/notification/notification.component';
+import { Observable } from 'rxjs/internal/Observable';
 
 @Component({
   selector: 'app-root',
@@ -25,15 +26,11 @@ import { NotificationComponent } from './components/notification/notification.co
 export class AppComponent implements OnInit {
   title = 'Misam';
 
-  public notificationsArray: Notification[] = [];
+  notifications$!: Observable<Notification[]>;
 
   constructor(private notificationService: NotificationService) {}
 
   ngOnInit(): void {
-    this.initializeNotifications();
-  }
-
-  initializeNotifications() {
-    this.notificationsArray = this.notificationService.getNotifications();
+    this.notifications$ = this.notificationService.notifications$;
   }
 }

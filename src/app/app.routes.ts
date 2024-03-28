@@ -8,6 +8,7 @@ import { CheckoutComponent } from './components/checkout/checkout.component';
 import { DeliveryInfoComponent } from './components/delivery-info/delivery-info.component';
 import { ReturnInfoComponent } from './components/return-info/return-info.component';
 import { TermsInfoComponent } from './components/terms-info/terms-info.component';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 
 export const routes: Routes = [
   {
@@ -45,5 +46,10 @@ export const routes: Routes = [
   {
     path: 'terms',
     component: TermsInfoComponent,
+  },
+  {
+    path: '**',
+    pathMatch: 'full',
+    component: PageNotFoundComponent,
   },
 ];

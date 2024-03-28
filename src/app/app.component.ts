@@ -8,6 +8,7 @@ import { Notification } from './interfaces/notification';
 import { NotificationService } from './services/notification.service';
 import { NotificationComponent } from './components/notification/notification.component';
 import { Observable } from 'rxjs/internal/Observable';
+import { Analytics } from '@angular/fire/analytics';
 
 @Component({
   selector: 'app-root',
@@ -28,7 +29,10 @@ export class AppComponent implements OnInit {
 
   notifications$!: Observable<Notification[]>;
 
-  constructor(private notificationService: NotificationService) {}
+  constructor(
+    private notificationService: NotificationService,
+    private analytics: Analytics
+  ) {}
 
   ngOnInit(): void {
     this.notifications$ = this.notificationService.notifications$;

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CartService } from '../../services/cart.service';
+import { CheckOutForm } from '../../interfaces/check-out-form';
 import { Router } from '@angular/router';
 
 @Component({
@@ -13,6 +14,7 @@ import { Router } from '@angular/router';
 export class CheckoutComponent implements OnInit {
   public totalNumberOfCartProducts!: number;
   public totalPrice!: number;
+
   constructor(private cartService: CartService, private router: Router) {}
 
   ngOnInit(): void {

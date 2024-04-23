@@ -21,63 +21,52 @@
     box-shadow: none;
 }
 
-label {
-    display: flex;
-    flex-direction: column;
-    width: 70px;
-    cursor: pointer;
+/* Define the shape and color of the hamburger lines */
+.navbar-toggler span {
+    display: block;
+    background-color: var(--red);
+    height: 0.5rem;
+    width: 3rem;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    position: relative;
+    left: 0;
+    opacity: 1;
+    transition: all 0.35s ease-out;
+    transform-origin: center left;
+    border-radius: 4px;
 }
 
-label span {
-    background: var(--red);
-    border-radius: 10px;
-    height: 7px;
-    margin: 7px 0;
-    transition: .4s cubic-bezier(0.68, -0.6, 0.32, 1.6);
-
+.navbar-toggler span:nth-child(1) {
+    margin-top: 0.5rem;
 }
 
+/* Animate collapse into X. */
 
-span:nth-of-type(1) {
-    width: 50%;
-
+.navbar-toggler:not(.collapsed) span:nth-child(1) {
+    transform: translate(10%, -14%) rotate(45deg);
 }
 
-span:nth-of-type(2) {
-    width: 100%;
+.navbar-toggler:not(.collapsed) span:nth-child(2) {
+    opacity: 0;
 }
 
-
-span:nth-of-type(3) {
-    width: 75%;
-
+.navbar-toggler:not(.collapsed) span:nth-child(3) {
+    transform: translate(10%, 14%) rotate(-45deg);
 }
 
+/* Animate collapse open into hamburger menu */
 
-input[type="checkbox"] {
-    display: none;
+.navbar-toggler span:nth-child(1) {
+    transform: translate(0%, 0%) rotate(0deg);
 }
 
-
-input[type="checkbox"]:checked~span:nth-of-type(1) {
-    transform-origin: bottom;
-    transform: rotatez(45deg) translate(8px, 0px)
+.navbar-toggler span:nth-child(2) {
+    opacity: 1;
 }
 
-
-input[type="checkbox"]:checked~span:nth-of-type(2) {
-
-    transform-origin: top;
-    transform: rotatez(-45deg)
-}
-
-
-input[type="checkbox"]:checked~span:nth-of-type(3) {
-
-    transform-origin: bottom;
-    width: 50%;
-    transform: translate(30px, -11px) rotatez(45deg);
-
+.navbar-toggler span:nth-child(3) {
+    transform: translate(0%, 0%) rotate(0deg);
 }
 
 @media only screen and (min-width: 1000px) and (max-width: 1200px) {

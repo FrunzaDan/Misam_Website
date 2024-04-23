@@ -4,26 +4,25 @@
             <a class="navbar-brand" routerLink="home">
                 <img src="../../../assets/images/Misam-Logo.svg" class="hover-logo" alt="Misam-Logo" width="140rem">
             </a>
-            <button class="navbar-toggler collapsed border-0" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                aria-label="Toggle navigation">
-                <label for="check">
-                    <input type="checkbox" id="check" />
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </label>
-            </button>
+            <a class="navbar-toggler collapsed border-0" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent">
+                <span></span>
+                <span></span>
+                <span></span>
+            </a>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a routerLink="home" class="nav-link hover-item">ACASĂ</a>
+                        <a routerLink="home" class="nav-link hover-item" data-bs-toggle="collapse"
+                            data-bs-target=".navbar-collapse.show">ACASĂ</a>
                     </li>
                     <li class="nav-item">
-                        <a routerLink="products" class="nav-link hover-item">PRODUSE</a>
+                        <a routerLink="products" class="nav-link hover-item" data-bs-toggle="collapse"
+                            data-bs-target=".navbar-collapse.show">PRODUSE</a>
                     </li>
                     <li class="nav-item">
-                        <a routerLink="contact" class="nav-link hover-item">CONTACT</a>
+                        <a routerLink="contact" class="nav-link hover-item" data-bs-toggle="collapse"
+                            data-bs-target=".navbar-collapse.show">CONTACT</a>
                     </li>
                 </ul>
             </div>

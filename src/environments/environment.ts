@@ -7,6 +7,8 @@ export const environment = {
     messagingSenderId: '690042396157',
     appId: '1:690042396157:web:b80e8de926ebd8bd224d94',
     measurementId: 'G-X2HDP6EYZ2',
+    databaseURL:
+      'https://misam-sibiu-default-rtdb.europe-west1.firebasedatabase.app',
   },
   emailJSConfig: {
     serviceID: 'test',

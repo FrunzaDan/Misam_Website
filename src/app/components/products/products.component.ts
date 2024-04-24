@@ -38,12 +38,13 @@ export class ProductsComponent implements OnInit {
     this.displayNumberOfProductsForCart();
   }
 
-  displayProductsContent(selectedCategory?: string) {
+  async displayProductsContent(selectedCategory?: string) {
     if (!selectedCategory) {
       this.selectedCategory = undefined;
     }
+
     this.fetchProductsService
-      .getProductsForDisplay()
+      .fetchProductsFromLocal()
       .subscribe((productList) => {
         this.productsList = productList;
         this.searchFilterProductsList = this.productsList;

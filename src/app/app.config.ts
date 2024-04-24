@@ -2,14 +2,8 @@ import { provideHttpClient, withFetch } from '@angular/common/http';
 import { ApplicationConfig, importProvidersFrom } from '@angular/core';
 import { getAnalytics, provideAnalytics } from '@angular/fire/analytics';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
-import {
-  BrowserModule,
-  provideClientHydration,
-} from '@angular/platform-browser';
-import {
-  BrowserAnimationsModule,
-  NoopAnimationsModule,
-} from '@angular/platform-browser/animations';
+import { provideClientHydration } from '@angular/platform-browser';
+import { provideAnimations } from '@angular/platform-browser/animations';
 import {
   provideRouter,
   withInMemoryScrolling,
@@ -21,6 +15,7 @@ import { FilterPipe } from './shared/filter.pipe';
 
 export const appConfig: ApplicationConfig = {
   providers: [
+    provideAnimations(),
     provideRouter(
       routes,
       withInMemoryScrolling({
@@ -34,9 +29,6 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(withFetch()),
     FilterPipe,
     importProvidersFrom([
-      BrowserModule,
-      BrowserAnimationsModule,
-      NoopAnimationsModule,
       provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
       provideAnalytics(() => getAnalytics()),
     ]),

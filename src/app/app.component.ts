@@ -9,6 +9,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { NotificationComponent } from './components/notification/notification.component';
 import { Notification } from './interfaces/notification';
 import { NotificationService } from './services/notification.service';
+import { fadeIn, fadeOut } from './animations';
 
 @Component({
   selector: 'app-root',
@@ -23,6 +24,7 @@ import { NotificationService } from './services/notification.service';
     HttpClientModule,
     NotificationComponent,
   ],
+  animations: [fadeIn, fadeOut],
 })
 export class AppComponent implements OnInit {
   title = 'Misam';

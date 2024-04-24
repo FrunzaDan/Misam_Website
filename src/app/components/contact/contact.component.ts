@@ -1,10 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component, ElementRef, OnInit, Renderer2 } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
-  FormBuilder,
   FormControl,
   FormGroup,
-  FormGroupDirective,
   FormsModule,
   ReactiveFormsModule,
   Validators,
@@ -21,12 +19,7 @@ import { SendEmailService } from '../../services/send-email.service';
   styleUrl: './contact.component.css',
 })
 export class ContactComponent implements OnInit {
-  constructor(
-    private formBuilder: FormBuilder,
-    private sendEmailService: SendEmailService,
-    private elementRef: ElementRef,
-    private renderer: Renderer2
-  ) {}
+  constructor(private sendEmailService: SendEmailService) {}
 
   submitted = false;
 

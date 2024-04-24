@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { NotificationService } from '../../services/notification.service';
 import { Notification } from '../../interfaces/notification';
-import { ElementRef, Renderer2 } from '@angular/core';
 
 @Component({
   selector: 'app-notification',
@@ -17,11 +16,7 @@ export class NotificationComponent implements OnInit, OnDestroy {
   notification!: Notification;
   private timeoutId: ReturnType<typeof setTimeout> | null = null;
 
-  constructor(
-    private notificationService: NotificationService,
-    private elementRef: ElementRef,
-    private renderer: Renderer2
-  ) {}
+  constructor(private notificationService: NotificationService) {}
 
   ngOnInit() {
     this.startTimeout();
@@ -41,19 +36,10 @@ export class NotificationComponent implements OnInit, OnDestroy {
   }
 
   dismissNotification() {
-    const notificationElement =
-      this.elementRef.nativeElement.querySelector('.notification');
-    this.renderer.addClass(notificationElement, 'remove');
-    setTimeout(() => {
-      this.renderer.removeChild(
-        this.elementRef.nativeElement,
-        notificationElement
-      );
-      if (this.timeoutId) {
-        clearTimeout(this.timeoutId);
-        this.timeoutId = null;
-        this.notificationService.removeNotification(this.notification);
-      }
-    }, 400);
+    if (this.timeoutId) {
+      clearTimeout(this.timeoutId);
+      this.timeoutId = null;
+      this.notificationService.removeNotification(this.notification);
+    }
   }
 }

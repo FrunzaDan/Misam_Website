@@ -1,19 +1,15 @@
-import { CartService } from '../../services/cart.service';
-import { CheckOutForm } from '../../interfaces/check-out-form';
-import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { Component, ElementRef, OnInit, Renderer2 } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
-  FormBuilder,
   FormControl,
   FormGroup,
-  FormGroupDirective,
   FormsModule,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { ContactMeForm } from '../../interfaces/contact-me-form';
+import { CartService } from '../../services/cart.service';
 import { SendEmailService } from '../../services/send-email.service';
 
 @Component({
@@ -30,10 +26,7 @@ export class CheckoutComponent implements OnInit {
   constructor(
     private cartService: CartService,
     private router: Router,
-    private formBuilder: FormBuilder,
-    private sendEmailService: SendEmailService,
-    private elementRef: ElementRef,
-    private renderer: Renderer2
+    private sendEmailService: SendEmailService
   ) {}
 
   submitted = false;

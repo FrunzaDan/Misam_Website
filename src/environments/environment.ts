@@ -8,4 +8,9 @@ export const environment = {
     appId: '1:690042396157:web:b80e8de926ebd8bd224d94',
     measurementId: 'G-X2HDP6EYZ2',
   },
+  emailJSConfig: {
+    serviceID: 'test',
+    templateID: 'test',
+    publicKey: 'test',
+  },
 };

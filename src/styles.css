@@ -42,10 +42,9 @@ body {
     height: 100dvh;
     margin: 0;
     padding: 0;
-    overflow-x: hidden;
-    overflow-y: scroll;
+    overflow-x: clip;
     scroll-behavior: smooth;
-    scrollbar-width: none;
+    scrollbar-width: thin;
     font-family: var(--light-font);
 }
 

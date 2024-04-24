@@ -1,14 +1,14 @@
-import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterOutlet } from '@angular/router';
-import { NavbarComponent } from './components/navbar/navbar.component';
-import { FooterComponent } from './components/footer/footer.component';
 import { HttpClientModule } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
+import { Analytics } from '@angular/fire/analytics';
+import { RouterOutlet } from '@angular/router';
+import { Observable } from 'rxjs/internal/Observable';
+import { FooterComponent } from './components/footer/footer.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { NotificationComponent } from './components/notification/notification.component';
 import { Notification } from './interfaces/notification';
 import { NotificationService } from './services/notification.service';
-import { NotificationComponent } from './components/notification/notification.component';
-import { Observable } from 'rxjs/internal/Observable';
-import { Analytics } from '@angular/fire/analytics';
 
 @Component({
   selector: 'app-root',

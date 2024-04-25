@@ -17,7 +17,7 @@ import { Subscription } from 'rxjs/internal/Subscription';
   templateUrl: './products.component.html',
   styleUrl: './products.component.css',
 })
-export class ProductsComponent implements OnInit, OnDestroy {
+export class ProductsComponent implements OnInit {
   public productsList: Product[] = [];
   public totalNumberOfCartProducts: number = 0;
   public totalPrice: number = 0;
@@ -48,7 +48,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
     }
 
     this.productSubscription = this.fetchProductsService
-      .fetchProductsFromFirebaseRealtimeDB()
+      .fetchProducts()
       .subscribe((productList: Product[]) => {
         this.productsList = productList;
         this.searchFilterProductsList = this.productsList;
@@ -95,14 +95,5 @@ export class ProductsComponent implements OnInit, OnDestroy {
     this.searchFilterProductsList = searchString
       ? this.filter.transform(this.productsList, searchString, 'title')
       : this.productsList;
-  }
-
-  ngOnDestroy() {
-    if (this.productSubscription) {
-      this.productSubscription.unsubscribe();
-    }
-    if (this.cartSubscription) {
-      this.cartSubscription.unsubscribe();
-    }
   }
 }

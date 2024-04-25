@@ -7,14 +7,14 @@ import { Product } from '../interfaces/product';
 export class SessionStorageService {
   private readonly productsSessionKey = 'productsSession';
 
-  getProductsSession(): Product[] | null {
+  getProductsSession(): Product[] {
     if (typeof window !== 'undefined') {
       try {
         const cartProductsJson = sessionStorage.getItem(
           this.productsSessionKey
         );
         if (!cartProductsJson) {
-          return null;
+          return [];
         }
         return JSON.parse(cartProductsJson) as Product[];
       } catch (parseError: unknown) {
@@ -22,15 +22,23 @@ export class SessionStorageService {
           'Error parsing products from session storage:',
           parseError
         );
-        return null;
+        return [];
       }
     } else {
-      return null;
+      return [];
     }
   }
 
   setProductsSession(products: Product[]): void {
-    console.log('SAVING... ' + products);
-    sessionStorage.setItem(this.productsSessionKey, JSON.stringify(products));
+    if (typeof window !== 'undefined') {
+      try {
+        sessionStorage.setItem(
+          this.productsSessionKey,
+          JSON.stringify(products)
+        );
+      } catch (parseError: unknown) {
+        console.error('Error setting products to session storage:', parseError);
+      }
+    }
   }
 }

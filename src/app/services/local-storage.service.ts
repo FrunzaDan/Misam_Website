@@ -5,7 +5,7 @@ import { Product } from '../interfaces/product';
   providedIn: 'root',
 })
 export class LocalStorageService {
-  private readonly cartProductsKey = 'cartProducts';
+  private readonly cartProductsKey = 'cartProductsLocal';
 
   getCartProductsLocal(): Product[] | null {
     if (typeof window !== 'undefined') {
@@ -28,6 +28,12 @@ export class LocalStorageService {
   }
 
   setCartProductsLocal(products: Product[]): void {
-    localStorage.setItem(this.cartProductsKey, JSON.stringify(products));
+    if (typeof window !== 'undefined') {
+      try {
+        localStorage.setItem(this.cartProductsKey, JSON.stringify(products));
+      } catch (parseError: unknown) {
+        console.error('Error setting products to local storage:', parseError);
+      }
+    }
   }
 }

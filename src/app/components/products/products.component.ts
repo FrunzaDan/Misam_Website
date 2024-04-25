@@ -48,7 +48,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
     }
 
     this.productSubscription = this.fetchProductsService
-      .fetchProductsFromLocal()
+      .fetchProductsFromFirebaseRealtimeDB()
       .subscribe((productList: Product[]) => {
         this.productsList = productList;
         this.searchFilterProductsList = this.productsList;

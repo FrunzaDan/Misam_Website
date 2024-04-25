@@ -7,7 +7,7 @@ import { Product } from '../interfaces/product';
 export class LocalStorageService {
   private readonly cartProductsKey = 'cartProducts';
 
-  getCartProducts(): Product[] | null {
+  getCartProductsLocal(): Product[] | null {
     if (typeof window !== 'undefined') {
       try {
         const cartProductsJson = localStorage.getItem(this.cartProductsKey);
@@ -27,7 +27,7 @@ export class LocalStorageService {
     }
   }
 
-  setCartProducts(products: Product[]): void {
+  setCartProductsLocal(products: Product[]): void {
     localStorage.setItem(this.cartProductsKey, JSON.stringify(products));
   }
 }

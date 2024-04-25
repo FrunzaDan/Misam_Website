@@ -5,12 +5,14 @@ import { Product } from '../interfaces/product';
   providedIn: 'root',
 })
 export class SessionStorageService {
-  private readonly productsKey = 'products';
+  private readonly productsSessionKey = 'productsSession';
 
-  getProducts(): Product[] | null {
+  getProductsSession(): Product[] | null {
     if (typeof window !== 'undefined') {
       try {
-        const cartProductsJson = sessionStorage.getItem(this.productsKey);
+        const cartProductsJson = sessionStorage.getItem(
+          this.productsSessionKey
+        );
         if (!cartProductsJson) {
           return null;
         }
@@ -27,7 +29,8 @@ export class SessionStorageService {
     }
   }
 
-  setProducts(products: Product[]): void {
-    sessionStorage.setItem(this.productsKey, JSON.stringify(products));
+  setProductsSession(products: Product[]): void {
+    console.log('SAVING... ' + products);
+    sessionStorage.setItem(this.productsSessionKey, JSON.stringify(products));
   }
 }

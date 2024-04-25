@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/compat/database';
 import { Observable, of } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { catchError, map, switchMap, tap } from 'rxjs/operators';
 import { Product } from '../interfaces/product';
 import { SessionStorageService } from './session-storage.service';
 
@@ -20,6 +20,8 @@ export class FetchProductsService {
     try {
       let productsListObservable: Observable<Product[]> =
         this.firebaseRealtimeDB.list<Product>('products').valueChanges();
+      if (productsListObservable) {
+      }
       return productsListObservable;
     } catch {
       return of([]);

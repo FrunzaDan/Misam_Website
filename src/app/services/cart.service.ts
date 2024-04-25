@@ -98,11 +98,11 @@ export class CartService {
 
   private updateCartStateAndStorage() {
     this.cartProductsListBehaviorSubject.next(this.cartProductsList.slice());
-    this.localStorageService.setCartProducts(this.cartProductsList);
+    this.localStorageService.setCartProductsLocal(this.cartProductsList);
   }
 
   private loadCartProductsFromLocalStorage() {
-    const products = this.localStorageService.getCartProducts();
+    const products = this.localStorageService.getCartProductsLocal();
     if (products) {
       this.cartProductsList = products;
       this.cartProductsListBehaviorSubject.next(this.cartProductsList);

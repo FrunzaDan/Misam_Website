@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { FetchProductsService } from '../../services/fetch-products.service';
@@ -8,6 +8,7 @@ import { FilterPipe } from '../../shared/filter.pipe';
 import { Product } from '../../interfaces/product';
 import { Notification } from '../../interfaces/notification';
 import { NotificationService } from '../../services/notification.service';
+import { Subscription } from 'rxjs/internal/Subscription';
 
 @Component({
   standalone: true,
@@ -16,7 +17,7 @@ import { NotificationService } from '../../services/notification.service';
   templateUrl: './products.component.html',
   styleUrl: './products.component.css',
 })
-export class ProductsComponent implements OnInit {
+export class ProductsComponent implements OnInit, OnDestroy {
   public productsList: Product[] = [];
   public totalNumberOfCartProducts: number = 0;
   public totalPrice: number = 0;
@@ -25,6 +26,9 @@ export class ProductsComponent implements OnInit {
   selectedCategory: string | undefined;
   public currentNotifications: Notification | null = null;
   public notifications: Notification[] = [];
+
+  private productSubscription: Subscription | null = null;
+  private cartSubscription: Subscription | null = null;
 
   constructor(
     private fetchProductsService: FetchProductsService,
@@ -43,10 +47,9 @@ export class ProductsComponent implements OnInit {
       this.selectedCategory = undefined;
     }
 
-    this.fetchProductsService
-      .fetchProductsFromFirebaseRealtimeDB()
+    this.productSubscription = this.fetchProductsService
+      .fetchProductsFromLocal()
       .subscribe((productList: Product[]) => {
-        console.log('TRIGGERED');
         this.productsList = productList;
         this.searchFilterProductsList = this.productsList;
 
@@ -65,7 +68,7 @@ export class ProductsComponent implements OnInit {
   }
 
   displayNumberOfProductsForCart() {
-    this.cartService
+    this.cartSubscription = this.cartService
       .getNumberOfProductsForCart()
       .subscribe((totalNumberOfProducts) => {
         this.totalNumberOfCartProducts = totalNumberOfProducts;
@@ -92,5 +95,14 @@ export class ProductsComponent implements OnInit {
     this.searchFilterProductsList = searchString
       ? this.filter.transform(this.productsList, searchString, 'title')
       : this.productsList;
+  }
+
+  ngOnDestroy() {
+    if (this.productSubscription) {
+      this.productSubscription.unsubscribe();
+    }
+    if (this.cartSubscription) {
+      this.cartSubscription.unsubscribe();
+    }
   }
 }

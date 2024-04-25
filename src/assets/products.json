@@ -1,92 +1,94 @@
-[
-  {
-    "id": 1,
-    "title": "product 21",
-    "price": 5.99,
-    "description": "Test Description 1",
-    "image": "../../../assets/images/products/sample_img.webp",
-    "category": "bakeries",
-    "quantity": 0
-  },
-  {
-    "id": 2,
-    "title": "product 12",
-    "price": 9.99,
-    "description": "Test Description 2",
-    "image": "../../../assets/images/products/sample_img.webp",
-    "category": "pastry",
-    "quantity": 0
-  },
-  {
-    "id": 3,
-    "title": "product 3",
-    "price": 9.99,
-    "description": "Test Description 3",
-    "image": "../../../assets/images/products/sample_img.webp",
-    "category": "sweets",
-    "quantity": 0
-  },
-  {
-    "id": 4,
-    "title": "product 1",
-    "price": 2.99,
-    "description": "Test Description 1",
-    "image": "../../../assets/images/products/sample_img.webp",
-    "category": "sweets",
-    "quantity": 0
-  },
-  {
-    "id": 5,
-    "title": "product 2",
-    "price": 9.99,
-    "description": "Test Description 2",
-    "image": "../../../assets/images/products/sample_img.webp",
-    "category": "pastry",
-    "quantity": 0
-  },
-  {
-    "id": 6,
-    "title": "product 3",
-    "price": 11.99,
-    "description": "Test Description 3",
-    "image": "../../../assets/images/products/sample_img.webp",
-    "category": "bakeries",
-    "quantity": 0
-  },
-  {
-    "id": 7,
-    "title": "product 1",
-    "price": 9.99,
-    "description": "Test Description 1",
-    "image": "../../../assets/images/products/sample_img.webp",
-    "category": "bakeries",
-    "quantity": 0
-  },
-  {
-    "id": 8,
-    "title": "product 2",
-    "price": 9.99,
-    "description": "Test Description 2",
-    "image": "../../../assets/images/products/sample_img.webp",
-    "category": "bakeries",
-    "quantity": 0
-  },
-  {
-    "id": 9,
-    "title": "product 3",
-    "price": 9.99,
-    "description": "Test Description 3",
-    "image": "../../../assets/images/products/sample_img.webp",
-    "category": "sweets",
-    "quantity": 0
-  },
-  {
-    "id": 10,
-    "title": "product 3",
-    "price": 9.99,
-    "description": "Test Description 3",
-    "image": "../../../assets/images/products/sample_img.webp",
-    "category": "bakeries",
-    "quantity": 0
-  }
-]
+{
+    "products": [
+        {
+            "category": "bakeries",
+            "description": "Test Description 1",
+            "id": 1,
+            "image": "../../../assets/images/products/sample_img.webp",
+            "price": 5.99,
+            "quantity": 0,
+            "title": "product 21"
+        },
+        {
+            "category": "pastry",
+            "description": "Test Description 2",
+            "id": 2,
+            "image": "../../../assets/images/products/sample_img.webp",
+            "price": 9.99,
+            "quantity": 0,
+            "title": "product 12"
+        },
+        {
+            "category": "sweets",
+            "description": "Test Description 3",
+            "id": 3,
+            "image": "../../../assets/images/products/sample_img.webp",
+            "price": 9.99,
+            "quantity": 0,
+            "title": "product 3"
+        },
+        {
+            "category": "sweets",
+            "description": "Test Description 1",
+            "id": 4,
+            "image": "../../../assets/images/products/sample_img.webp",
+            "price": 2.99,
+            "quantity": 0,
+            "title": "product 1"
+        },
+        {
+            "category": "pastry",
+            "description": "Test Description 2",
+            "id": 5,
+            "image": "../../../assets/images/products/sample_img.webp",
+            "price": 9.99,
+            "quantity": 0,
+            "title": "product 2"
+        },
+        {
+            "category": "bakeries",
+            "description": "Test Description 3",
+            "id": 6,
+            "image": "../../../assets/images/products/sample_img.webp",
+            "price": 11.99,
+            "quantity": 0,
+            "title": "product 3"
+        },
+        {
+            "category": "bakeries",
+            "description": "Test Description 1",
+            "id": 7,
+            "image": "../../../assets/images/products/sample_img.webp",
+            "price": 9.99,
+            "quantity": 0,
+            "title": "product 1"
+        },
+        {
+            "category": "bakeries",
+            "description": "Test Description 2",
+            "id": 8,
+            "image": "../../../assets/images/products/sample_img.webp",
+            "price": 9.99,
+            "quantity": 0,
+            "title": "product 2"
+        },
+        {
+            "category": "sweets",
+            "description": "Test Description 3",
+            "id": 9,
+            "image": "../../../assets/images/products/sample_img.webp",
+            "price": 9.99,
+            "quantity": 0,
+            "title": "product 3"
+        },
+        {
+            "category": "bakeries",
+            "description": "Test Description 3",
+            "id": 10,
+            "image": "../../../assets/images/products/sample_img.webp",
+            "price": 9.99,
+            "quantity": 0,
+            "title": "product 3"
+        }
+    ]
+}

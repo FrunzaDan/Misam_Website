@@ -4,6 +4,7 @@ import { AngularFireDatabase } from '@angular/fire/compat/database';
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Product } from '../interfaces/product';
+import { SessionStorageService } from './session-storage.service';
 
 @Injectable({
   providedIn: 'root',
@@ -11,7 +12,8 @@ import { Product } from '../interfaces/product';
 export class FetchProductsService {
   constructor(
     private http: HttpClient,
-    private firebaseRealtimeDB: AngularFireDatabase
+    private firebaseRealtimeDB: AngularFireDatabase,
+    private sessionStorageService: SessionStorageService
   ) {}
 
   fetchProductsFromFirebaseRealtimeDB(): Observable<Product[]> {
@@ -26,7 +28,7 @@ export class FetchProductsService {
 
   fetchProductsFromLocal(): Observable<Product[]> {
     return this.http
-      .get<Product[]>('../../assets/products.json')
-      .pipe(map((products: Product[]) => products));
+      .get<{ products: Product[] }>('../../assets/products.json')
+      .pipe(map((data: { products: Product[] }) => data.products));
   }
 }

@@ -44,7 +44,7 @@ export class ProductsComponent implements OnInit {
     }
 
     this.fetchProductsService
-      .fetchProductsFromLocal()
+      .fetchProductsFromFirebase()
       .subscribe((productList) => {
         this.productsList = productList;
         this.searchFilterProductsList = this.productsList;

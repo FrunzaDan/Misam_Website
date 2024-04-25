@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { Product } from '../interfaces/product';
-import { Observable } from 'rxjs';
+import { from, Observable } from 'rxjs';
 import { getDatabase, ref, onValue, get } from 'firebase/database';
 import { environment } from '../../environments/environment';
 import { initializeApp } from 'firebase/app';
@@ -18,21 +18,38 @@ export class FetchProductsService {
 
   async fetchProductsFromFirebasePromise(): Promise<Product[]> {
     const dataRef = ref(db, '/');
-    const snapshot = await get(dataRef);
-    console.log('processing...');
-    console.log(snapshot.val());
-    return snapshot.val() as Product[];
+    try {
+      const snapshot = await get(dataRef);
+      if (snapshot.exists()) {
+        const observable = from(snapshot.val());
+        return snapshot.val() as Product[];
+      } else {
+        console.log('No data available');
+        return null as any;
+      }
+    } catch {
+      console.log('Failed to fetch!');
+      return null as any;
+    }
   }
 
   fetchProductsFromFirebase(): Observable<Product[]> {
     return new Observable<Product[]>((subscriber) => {
       this.fetchProductsFromFirebasePromise()
         .then((products) => {
-          subscriber.next(products);
-          subscriber.complete();
+          if (products !== null) {
+            subscriber.next(products);
+            subscriber.complete();
+          } else {
+            subscriber.error(
+              new Error('Failed to fetch products or no data available')
+            );
+          }
         })
         .catch((error) => {
-          subscriber.error(error);
+          console.error('Error fetching products:', error);
+          // Handle rejection here (log and continue build?)
+          subscriber.error(new Error('Build failed due to product data error')); // Example handling
         });
     });
   }

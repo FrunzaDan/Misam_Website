@@ -9,5 +9,5 @@ bootstrapApplication(AppComponent, appConfig).catch((err) =>
   console.error(err)
 );
 
-const app = initializeApp(environment.firebaseConfig);
+export const app = initializeApp(environment.firebaseConfig);
 const analytics = getAnalytics(app);

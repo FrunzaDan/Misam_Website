@@ -44,14 +44,15 @@ export class ProductsComponent implements OnInit {
     }
 
     this.fetchProductsService
-      .fetchProductsFromFirebase()
-      .subscribe((productList) => {
+      .fetchProductsFromFirebaseRealtimeDB()
+      .subscribe((productList: Product[]) => {
+        console.log('TRIGGERED');
         this.productsList = productList;
         this.searchFilterProductsList = this.productsList;
 
         if (selectedCategory) {
           this.searchFilterProductsList = this.productsList.filter(
-            (product) => product.category === selectedCategory
+            (product: Product): boolean => product.category === selectedCategory
           );
         } else {
           this.searchFilterProductsList = this.productsList;

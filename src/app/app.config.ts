@@ -37,7 +37,6 @@ export const appConfig: ApplicationConfig = {
       provideAnalytics(() => getAnalytics()),
       provideDatabase(() => getDatabase()),
       AngularFireModule.initializeApp(environment.firebaseConfig),
-      AngularFireDatabaseModule,
     ]),
   ],
 };

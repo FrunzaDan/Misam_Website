@@ -13,42 +13,52 @@ export const routes: Routes = [
   {
     path: 'home',
     component: HomeComponent,
+    title: 'Home',
   },
   {
     path: '',
     component: HomeComponent,
+    title: 'Home',
   },
   {
     path: 'products',
     component: ProductsComponent,
+    title: 'Produse',
   },
   {
     path: 'contact',
     component: ContactComponent,
+    title: 'Contact',
   },
   {
     path: 'cart',
     component: CartComponent,
+    title: 'Coș',
   },
   {
     path: 'checkout',
     component: CheckoutComponent,
+    title: 'Checkout',
   },
   {
     path: 'delivery',
     component: DeliveryInfoComponent,
+    title: 'Livrare',
   },
   {
     path: 'return',
     component: ReturnInfoComponent,
+    title: 'Retur',
   },
   {
     path: 'terms',
     component: TermsInfoComponent,
+    title: 'Termeni și condiții',
   },
   {
     path: '**',
     pathMatch: 'full',
     component: PageNotFoundComponent,
+    title: '404',
   },
 ];

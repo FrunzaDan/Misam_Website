@@ -18,12 +18,14 @@ h6 {
 }
 
 .table {
-    border: 2px var(--red) solid;
+    border: 4px var(--red) solid;
     border-spacing: 0;
     border-collapse: separate;
     table-layout: fixed;
-    border-radius: 10px;
+    border-radius: 1.4rem;
     background-color: white;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
 }
 
 th {
@@ -39,7 +41,7 @@ td {
 }
 
 .table-product-img {
-    border-radius: 10px;
+    border-radius: 1.4rem;
     border: 2px var(--red) solid;
 }
 

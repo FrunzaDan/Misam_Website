@@ -1,17 +1,17 @@
 .nav-link {
-    font-size: 4rem;
-    font-family: var(--regular-font);
+    font-size: 3.6rem;
+    font-family: var(--bold-font);
     margin: 0rem 2rem;
     text-align: center;
-    background-image: linear-gradient(45deg, var(--red), var(--violet), var(--red));
-    background-size: 100%;
-    background-repeat: repeat;
-    -webkit-background-clip: text;
-    -moz-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    -moz-text-fill-color: transparent;
-    filter: drop-shadow(2px 2px var(--white));
+    color: var(--red);
+}
+
+.navbar {
+    border-radius: 1.4rem;
+    background: rgba(255, 255, 255, 0.8);
+    border: 0.4rem var(--red) solid;
+    margin-top: 1rem;
+    font-family: var(--bold-font);
 }
 
 .navbar-toggler:focus,
@@ -34,7 +34,7 @@
     opacity: 1;
     transition: all 0.35s ease-out;
     transform-origin: center left;
-    border-radius: 4px;
+    border-radius: 0.4rem;
 }
 
 .navbar-toggler span:nth-child(1) {
@@ -71,35 +71,35 @@
 
 @media only screen and (min-width: 1000px) and (max-width: 1200px) {
     .nav-link {
-        font-size: 3.4rem;
+        font-size: 3rem;
         margin: 0rem 1rem;
     }
 }
 
 @media only screen and (min-width: 900px) and (max-width: 1000px) {
     .nav-link {
-        font-size: 3rem;
+        font-size: 2.6rem;
         margin: 0rem 1rem;
     }
 }
 
 @media only screen and (min-width: 768px) and (max-width: 900px) {
     .nav-link {
-        font-size: 2.2rem;
+        font-size: 2rem;
         margin: 0rem 1rem;
     }
 }
 
 @media only screen and (min-width: 576px) and (max-width: 768px) {
     .nav-link {
-        font-size: 1.6rem;
+        font-size: 1.3rem;
         margin: 0rem 0.2rem;
     }
 }
 
 @media only screen and (max-width: 576px) {
     .nav-link {
-        font-size: 3.6rem;
+        font-size: 3.2rem;
         margin: 0.4rem 0.2rem;
     }
 }

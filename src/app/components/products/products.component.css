@@ -13,12 +13,12 @@
     color: var(--red);
 }
 
-.button-width-100prc {
+.width-100prc {
     width: 100%;
 }
 
 .product-card {
-    border: 1px solid var(--white);
+    border: 0.2rem solid var(--white);
     width: 16rem;
     margin: 1rem 0.4rem;
 }

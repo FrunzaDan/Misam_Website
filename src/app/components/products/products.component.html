@@ -14,7 +14,7 @@
             </div>
             <div class="col-md justify-content-center align-items-center text-center p-1 m-2">
                 <button routerLink="../cart"
-                    class="btn btn-primary d-flex button-width-100prc justify-content-center align-items-center text-center">
+                    class="btn btn-primary d-flex width-100prc justify-content-center align-items-center text-center">
                     <i class="bi bi-cart no-italics comanda-mea">
                         <span class="ps-2">
                             Comanda mea
@@ -36,24 +36,23 @@
         <div class="container">
             <div class="row px-2 py-4">
                 <div class="col d-flex justify-content-center align-items-center p-2">
-                    <button class="btn btn-secondary button-width-100prc h-100" (click)="displayProductsContent()"
+                    <button class="btn btn-primary width-100prc h-100" (click)="displayProductsContent()"
                         [ngClass]="{ 'selected-btn': !selectedCategory }">Toate</button>
                 </div>
                 <div class="col d-flex justify-content-center align-items-center p-2">
-                    <button class="btn btn-secondary button-width-100prc h-100" (click)="onCategorySelect('bakeries')"
+                    <button class="btn btn-primary width-100prc h-100" (click)="onCategorySelect('bakeries')"
                         [ngClass]="{ 'selected-btn': selectedCategory === 'bakeries' }">Cofetărie</button>
                 </div>
                 <div class="col d-flex justify-content-center align-items-center p-2">
-                    <button class="btn btn-secondary button-width-100prc h-100" (click)="onCategorySelect('pastry')"
+                    <button class="btn btn-primary width-100prc h-100" (click)="onCategorySelect('pastry')"
                         [ngClass]="{ 'selected-btn': selectedCategory === 'pastry' }">Patiserie</button>
                 </div>
                 <div class="col d-flex justify-content-center align-items-center p-2">
-                    <button class="btn btn-secondary button-width-100prc h-100" (click)="onCategorySelect('sweets')"
+                    <button class="btn btn-primary width-100prc h-100" (click)="onCategorySelect('sweets')"
                         [ngClass]="{ 'selected-btn': selectedCategory === 'sweets' }">Torturi</button>
                 </div>
                 <div class="col d-flex justify-content-center align-items-center p-2">
-                    <button class="btn btn-secondary button-width-100prc h-100"
-                        (click)="onCategorySelect('basic_products')"
+                    <button class="btn btn-primary width-100prc h-100" (click)="onCategorySelect('basic_products')"
                         [ngClass]="{ 'selected-btn': selectedCategory === 'basic_products' }">Produse de bază</button>
                 </div>
             </div>

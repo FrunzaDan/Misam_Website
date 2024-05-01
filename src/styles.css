@@ -4,7 +4,7 @@
     --violet: #8A2BE2;
     --main-violet-for-alpha: 138, 43, 226;
     --white: #FFF;
-    --bold-font: "Bold", sans-serif;
+    --bold-font: Bold, sans-serif;
     --regular-font: Regular, sans-serif;
     --light-font: Light, sans-serif;
 }
@@ -45,22 +45,22 @@ body {
     overflow-x: clip;
     scroll-behavior: smooth;
     scrollbar-width: thin;
-    font-family: var(--light-font);
+    font-family: var(--regular-font);
 }
 
 @font-face {
     font-family: 'Bold';
-    src: url('./assets/fonts/DMSans_18pt-Bold.ttf') format('truetype');
+    src: url('./assets/fonts/Raleway-Bold.ttf') format('truetype');
 }
 
 @font-face {
     font-family: 'Regular';
-    src: url('./assets/fonts/DMSans_18pt-Regular.ttf') format('truetype');
+    src: url('./assets/fonts/Raleway-Regular.ttf') format('truetype');
 }
 
 @font-face {
     font-family: 'Light';
-    src: url('./assets/fonts/DMSans_18pt-Light.ttf') format('truetype');
+    src: url('./assets/fonts/Raleway-Thin.ttf') format('truetype');
 }
 
 a,
@@ -72,20 +72,51 @@ a:active {
     color: inherit;
 }
 
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.form-control:focus {
+    border-color: var(--red);
+    box-shadow: none;
+}
+
+iframe {
+    outline: none !important;
+    border: none !important;
+}
+
+iframe:focus {
+    outline: none !important;
+    border: none !important;
+}
+
+.gm-style iframe+div {
+    border: none !important;
+}
+
 .card {
     border: none;
-    border-radius: 1rem;
+    border-radius: 1.4rem;
     color: white;
-    background: linear-gradient(-45deg,
-            rgba(var(--main-red-for-alpha), 0.9),
-            rgba(var(--main-violet-for-alpha), 0.9),
-            rgba(var(--main-red-for-alpha), 0.9));
+    background:
+        rgba(var(--main-red-for-alpha), 0.8);
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
 .card-img-top {
-    border-top-left-radius: 1rem;
-    border-top-right-radius: 1rem;
+    border-top-left-radius: 1.2rem;
+    border-top-right-radius: 1.2rem;
+}
+
+.subtitle-1 {
+    font-family: var(--bold-font);
+    font-size: 2rem;
+}
+
+.subtitle-2 {
+    font-family: var(--regular-font);
+    font-size: 2rem;
 }
 
 .no-italics {
@@ -98,14 +129,13 @@ a:active {
 
 .form-control {
     border: 1px solid var(--red);
-
 }
 
 .text-color-white {
     color: var(--white) !important;
 }
 
-.button-width-100prc {
+.width-100prc {
     width: 100%;
 }
 

@@ -111,12 +111,19 @@ iframe:focus {
 
 .subtitle-1 {
     font-family: var(--bold-font);
-    font-size: 2rem;
+    font-size: 4rem;
 }
 
 .subtitle-2 {
     font-family: var(--regular-font);
     font-size: 2rem;
+}
+
+.list-container-1 {
+    font-family: var(--bold-font);
+    font-size: 2rem;
+    text-align: start;
+    padding: 1rem;
 }
 
 .no-italics {

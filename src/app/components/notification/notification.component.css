@@ -2,14 +2,18 @@
     position: fixed;
     bottom: 2rem;
     right: 2rem;
-    box-shadow: 0rem 0rem 4rem rgba(255, 255, 255, 0.9);
+    box-shadow: 0rem 0rem 6rem rgba(255, 255, 255, 0.9);
     z-index: 9999;
     color: var(--white);
+    border: 0.2rem solid var(--white);
+    font-size: 1.4rem;
+    padding: 1rem;
 }
 
 @media only screen and (max-width: 576px) {
     .notification {
         bottom: 0rem;
         right: 0rem;
+        font-size: 1.2rem;
     }
 }

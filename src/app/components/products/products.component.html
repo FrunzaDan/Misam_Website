@@ -4,28 +4,24 @@
         <div class="row justify-content-center align-items-center pt-2 mt-2">
             <span class="subtitle-2 text-center pt-2 mt-2">Găsește și comandă produse:</span>
         </div>
-        <div class="row justify-content-center align-items-center p-2 m-2">
-            <div class="col-md justify-content-center align-items-center text-center p-1 m-2">
-                <div class="form-group search-products-form-group">
-                    <input type="text" class="form-control search-products-form-control" (keyup)="search($event)"
-                        placeholder="caută produse">
-                    <label><i class="bi bi-search search-icon"></i></label>
-                </div>
+        <div class="row justify-content-center align-items-center p-2">
+            <div class="col-md justify-content-center align-items-center text-center p-2">
+                <input type="text" class="form-control search-products-form-control p-2" (keyup)="search($event)"
+                    placeholder="caută produse">
+                <label><i class="bi bi-search search-icon"></i></label>
             </div>
-            <div class="col-md justify-content-center align-items-center text-center p-1 m-2">
+            <div class="col-md justify-content-center align-items-center text-center p-2">
                 <button routerLink="../cart"
-                    class="btn btn-primary d-flex width-100prc justify-content-center align-items-center text-center">
-                    <i class="bi bi-cart no-italics comanda-mea">
-                        <span class="ps-2">
-                            Comanda mea
-                        </span>
-                        <div class="badge bg-danger m-2">
-                            Produse: {{totalNumberOfCartProducts}}
-                        </div>
-                    </i>
+                    class="btn btn-primary width-100prc justify-content-center align-items-center text-center p-2">
+                    <img src="../../../assets/images/cart/cart.svg" alt="cart" class="cart-icon">
+                    <span class="ps-2">
+                        Comanda mea
+                    </span>
 
+                    <div class="badge bg-danger">
+                        Produse: {{totalNumberOfCartProducts}}
+                    </div>
                 </button>
-
             </div>
         </div>
     </div>
@@ -69,8 +65,14 @@
                         <p>
                             <strong>Preț:</strong> {{product.price}} RON
                         </p>
-                        <button class="btn btn-primary add-to-cart-btn" (click)=addToCart(product)>Adaugă la
-                            comandă</button>
+                        <button
+                            class="btn btn-primary width-100prc justify-content-center align-items-center text-center"
+                            (click)=addToCart(product)>
+                            <img src="../../../assets/images/cart/cart_add.svg" alt="cart" class="cart-icon">
+                            <div>
+                                Comandă
+                            </div>
+                        </button>
                     </div>
                 </div>
             </ng-container>

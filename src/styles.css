@@ -13,16 +13,16 @@
     background-color: var(--red) !important;
     border-color: white !important;
     color: var(--white) !important;
+    font-size: 1.4rem;
 }
 
-.btn-secondary {
-    background-color: var(--violet) !important;
-    border-color: white !important;
-    color: var(--white) !important;
+.cart-icon {
+    width: auto;
+    height: 2rem;
 }
 
 .selected-btn {
-    box-shadow: 0.2rem 0.5rem 1rem rgba(255, 255, 255, .8);
+    box-shadow: 0.4rem 1rem 2rem rgba(255, 255, 255, 0.8);
 }
 
 *,
@@ -95,13 +95,17 @@ iframe:focus {
     border: none !important;
 }
 
+.invalid-feedback {
+    color: var(--white);
+}
+
 .card {
     border: none;
     border-radius: 1.4rem;
-    color: white;
+    color: var(--white);
     background:
         rgba(var(--main-red-for-alpha), 0.8);
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    box-shadow: rgba(0, 0, 0, 0.5) 0px 8px 16px;
 }
 
 .card-img-top {
@@ -194,6 +198,11 @@ iframe:focus {
         background-color: var(--white) !important;
         border-color: var(--red) !important;
         color: var(--red) !important;
+
+        .cart-icon {
+            -webkit-filter: brightness(0) saturate(100%) invert(16%) sepia(88%) saturate(2965%) hue-rotate(350deg) brightness(86%) contrast(128%);
+            filter: brightness(0) saturate(100%) invert(16%) sepia(88%) saturate(2965%) hue-rotate(350deg) brightness(86%) contrast(128%)
+        }
     }
 
     .btn-primary:active {
@@ -218,6 +227,8 @@ iframe:focus {
         transform: scale(1.04);
         filter: drop-shadow(6px 6px var(--violet)) drop-shadow(6px 6px var(--red));
     }
+
+
 }
 
 @media (hover: none),

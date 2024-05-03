@@ -34,11 +34,14 @@ export class CheckoutComponent implements OnInit {
   checkOutForm = new FormGroup({
     from_name: new FormControl('', [Validators.required]),
     from_email: new FormControl('', [Validators.required, Validators.email]),
-    from_tel: new FormControl('', [
+    from_phone: new FormControl('', [
       Validators.required,
       Validators.pattern('^[0-9]{9,12}$'),
     ]),
-    from_message: new FormControl('', [Validators.required]),
+    from_town: new FormControl('', [Validators.required]),
+    from_street: new FormControl('', [Validators.required]),
+    from_street_number: new FormControl('', [Validators.required]),
+    from_zip: new FormControl('', [Validators.required]),
   });
 
   get f() {
@@ -83,8 +86,11 @@ export class CheckoutComponent implements OnInit {
         this.checkOutForm.reset();
         this.checkOutForm.controls.from_name.setErrors(null);
         this.checkOutForm.controls.from_email.setErrors(null);
-        this.checkOutForm.controls.from_tel.setErrors(null);
-        this.checkOutForm.controls.from_message.setErrors(null);
+        this.checkOutForm.controls.from_phone.setErrors(null);
+        this.checkOutForm.controls.from_town.setErrors(null);
+        this.checkOutForm.controls.from_street.setErrors(null);
+        this.checkOutForm.controls.from_street_number.setErrors(null);
+        this.checkOutForm.controls.from_zip.setErrors(null);
       } else {
       }
     });

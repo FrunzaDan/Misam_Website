@@ -23,7 +23,7 @@ h6 {
     border-collapse: separate;
     table-layout: fixed;
     border-radius: 1.4rem;
-    background-color: white;
+    background-color: var(--white);
     padding-top: 1rem;
     padding-bottom: 1rem;
 }

@@ -24,8 +24,8 @@ export class ContactComponent implements OnInit {
   submitted = false;
 
   contactMeForm = new FormGroup({
-    from_name: new FormControl('', [Validators.required]),
-    from_email: new FormControl('', [Validators.required, Validators.email]),
+    name: new FormControl('', [Validators.required]),
+    email: new FormControl('', [Validators.required, Validators.email]),
     from_tel: new FormControl('', [
       Validators.required,
       Validators.pattern('^[0-9]{9,12}$'),
@@ -51,8 +51,8 @@ export class ContactComponent implements OnInit {
     responseCodePromise.then((responseCode) => {
       if (responseCode === 200) {
         this.contactMeForm.reset();
-        this.contactMeForm.controls.from_name.setErrors(null);
-        this.contactMeForm.controls.from_email.setErrors(null);
+        this.contactMeForm.controls.name.setErrors(null);
+        this.contactMeForm.controls.email.setErrors(null);
         this.contactMeForm.controls.from_tel.setErrors(null);
         this.contactMeForm.controls.from_message.setErrors(null);
       } else {

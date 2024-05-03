@@ -1,9 +1,9 @@
 export interface CheckOutForm {
   name: string;
   email: string;
-  msisdn: string;
+  phone: string;
   town: string;
-  street: string;
-  number: string;
-  zipCode: string;
+  street_address: string;
+  address_line1: string;
+  zip: string;
 }

@@ -7,30 +7,29 @@
                     </div>
                     <form [formGroup]="contactMeForm" #formDirective="ngForm" id="contactForm" (ngSubmit)="onSubmit()">
                         <div class="mb-3">
-                            <label for="from_name" class="form-label">Nume:</label>
+                            <label for="name" class="form-label">Nume:</label>
 
-                            <input class="form-control" formControlName="from_name" name="from_name" type="text"
-                                placeholder="Numele tău"
-                                [ngClass]="{ 'is-invalid': submitted && f.from_name.errors }" />
-                            <div *ngIf="submitted && f.from_name.errors" class="invalid-feedback">
-                                <div *ngIf="f['from_name'].errors['required']">Numele este necesar.</div>
+                            <input class="form-control" formControlName="name" name="name" type="text"
+                                placeholder="Numele tău" [ngClass]="{ 'is-invalid': submitted && f.name.errors }" />
+                            <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+                                <div *ngIf="f['name'].errors['required']">Numele este necesar.</div>
                             </div>
                         </div>
                         <div class="mb-3">
-                            <label for="from_email" class="form-label">Adresă de
+                            <label for="email" class="form-label">Adresă de
                                 E-mail:</label>
-                            <input class="form-control" formControlName="from_email" name="from_email" type="email"
+                            <input class="form-control" formControlName="email" name="email" type="email"
                                 placeholder="Adresa ta de E-mail"
-                                [ngClass]="{ 'is-invalid': submitted && f.from_email.errors }" />
-                            <div *ngIf="submitted && f.from_email.errors" class="invalid-feedback">
-                                <div *ngIf="f['from_email'].errors['required']">E-mail-ul este necesar.</div>
-                                <div *ngIf="f['from_email'].errors['email']">Un E-mail valid este necesar.</div>
+                                [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+                            <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                                <div *ngIf="f['email'].errors['required']">E-mail-ul este necesar.</div>
+                                <div *ngIf="f['email'].errors['email']">Un E-mail valid este necesar.</div>
                             </div>
                         </div>
                         <div class="mb-3">
                             <label for="from_tel" class="form-label">Număr de
                                 telefon:</label>
-                            <input class="form-control" formControlName="from_tel" name="from_email" type="tel"
+                            <input class="form-control" formControlName="from_tel" name="email" type="tel"
                                 placeholder="Numărul tău de telefon"
                                 [ngClass]="{ 'is-invalid': submitted && f.from_tel.errors }" />
                             <div *ngIf="submitted && f.from_tel.errors" class="invalid-feedback">
@@ -43,7 +42,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="from_message" class="form-label">Mesaj:</label>
-                            <textarea class="form-control" formControlName="from_message" name="from_email" type="text"
+                            <textarea class="form-control" formControlName="from_message" name="email" type="text"
                                 placeholder="Mesajul tău"
                                 [ngClass]="{ 'is-invalid': submitted && f.from_message.errors }"
                                 style="height: 10rem"></textarea>

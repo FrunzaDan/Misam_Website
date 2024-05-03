@@ -8,8 +8,10 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
-import { ContactMeForm } from '../../interfaces/contact-me-form';
+import { CheckOutForm } from '../../interfaces/check-out-form';
+import { Product } from '../../interfaces/product';
 import { CartService } from '../../services/cart.service';
+import { LocalStorageService } from '../../services/local-storage.service';
 import { SendEmailService } from '../../services/send-email.service';
 
 @Component({
@@ -26,22 +28,23 @@ export class CheckoutComponent implements OnInit {
   constructor(
     private cartService: CartService,
     private router: Router,
-    private sendEmailService: SendEmailService
+    private sendEmailService: SendEmailService,
+    private localStorageService: LocalStorageService
   ) {}
 
   submitted = false;
 
   checkOutForm = new FormGroup({
-    from_name: new FormControl('', [Validators.required]),
-    from_email: new FormControl('', [Validators.required, Validators.email]),
-    from_phone: new FormControl('', [
+    name: new FormControl('', [Validators.required]),
+    email: new FormControl('', [Validators.required, Validators.email]),
+    phone: new FormControl('', [
       Validators.required,
       Validators.pattern('^[0-9]{9,12}$'),
     ]),
-    from_town: new FormControl('', [Validators.required]),
-    from_street: new FormControl('', [Validators.required]),
-    from_street_number: new FormControl('', [Validators.required]),
-    from_zip: new FormControl('', [Validators.required]),
+    town: new FormControl('', [Validators.required]),
+    street_address: new FormControl('', [Validators.required]),
+    address_line1: new FormControl('', [Validators.required]),
+    zip: new FormControl('', [Validators.required]),
   });
 
   get f() {
@@ -53,46 +56,110 @@ export class CheckoutComponent implements OnInit {
     this.displayTotalPrice();
   }
 
-  displayTotalPrice() {
-    this.cartService.getTotalPrice().subscribe((totalPriceCalculated) => {
-      this.totalPrice = totalPriceCalculated;
-    });
+  displayTotalPrice(): void {
+    this.cartService
+      .getTotalPrice()
+      .subscribe((totalPriceCalculated: number) => {
+        this.totalPrice = totalPriceCalculated;
+      });
   }
 
-  displayTotalNumberOfCartProducts() {
+  displayTotalNumberOfCartProducts(): void {
     this.cartService
       .getNumberOfProductsForCart()
-      .subscribe((totalNumberOfProducts) => {
+      .subscribe((totalNumberOfProducts: number) => {
         this.totalNumberOfCartProducts = totalNumberOfProducts;
       });
   }
 
-  handleBackToCartClick(event: Event) {
+  handleBackToCartClick(event: Event): void {
     event.preventDefault();
     this.router.navigate(['/cart']);
   }
 
-  onSubmit() {
+  onSubmit(): void {
     this.submitted = true;
     if (this.checkOutForm.invalid) {
       return;
     }
-    let responseCodePromise: Promise<number> =
-      this.sendEmailService.sendEmailJS(
-        this.checkOutForm.value as ContactMeForm
-      );
-    responseCodePromise.then((responseCode) => {
-      if (responseCode === 200) {
-        this.checkOutForm.reset();
-        this.checkOutForm.controls.from_name.setErrors(null);
-        this.checkOutForm.controls.from_email.setErrors(null);
-        this.checkOutForm.controls.from_phone.setErrors(null);
-        this.checkOutForm.controls.from_town.setErrors(null);
-        this.checkOutForm.controls.from_street.setErrors(null);
-        this.checkOutForm.controls.from_street_number.setErrors(null);
-        this.checkOutForm.controls.from_zip.setErrors(null);
-      } else {
+
+    let checkOutFormData: CheckOutForm = this.checkOutForm
+      .value as CheckOutForm;
+    let order: string = this.buildOrder(checkOutFormData);
+
+    console.log(order);
+
+    this.resetForm(checkOutFormData);
+  }
+
+  buildOrder(checkOutForm: CheckOutForm): string {
+    let customer_contact_info: string =
+      'Comanda: \n' +
+      'Nume client: ' +
+      checkOutForm.name +
+      '\n' +
+      'E-mail client: ' +
+      checkOutForm.email +
+      '\n' +
+      'Telefon client: ' +
+      checkOutForm.phone +
+      '\n' +
+      'Adresă livrare client: \n' +
+      'Localitate: ' +
+      checkOutForm.town +
+      '\n' +
+      'Stradă: ' +
+      checkOutForm.street_address +
+      '\n' +
+      'Număr: ' +
+      checkOutForm.address_line1 +
+      '\n' +
+      'Cod poștal: ' +
+      checkOutForm.zip +
+      '\n' +
+      '--------------------' +
+      '\n';
+
+    let productString: string = 'Produse: \n\n';
+    let customer_ordered_products: Product[] | null =
+      this.localStorageService.getCartProductsLocal();
+    if (customer_ordered_products) {
+      for (let product of customer_ordered_products) {
+        productString +=
+          '\n' +
+          'Produs: ' +
+          product.title +
+          '\n' +
+          'Preț: ' +
+          product.price +
+          '\n' +
+          'Cantitate: ' +
+          product.quantity +
+          '\n' +
+          '--------------------';
       }
-    });
+      productString +=
+        '\n' +
+        'Număr produse: ' +
+        this.totalNumberOfCartProducts +
+        '\n' +
+        'Preț total: ' +
+        this.totalPrice;
+    }
+
+    let order: string = customer_contact_info + '\n' + productString;
+
+    return order;
+  }
+
+  resetForm(checkOutForm: CheckOutForm) {
+    this.checkOutForm.reset();
+    this.checkOutForm.controls.name.setErrors(null);
+    this.checkOutForm.controls.email.setErrors(null);
+    this.checkOutForm.controls.phone.setErrors(null);
+    this.checkOutForm.controls.town.setErrors(null);
+    this.checkOutForm.controls.street_address.setErrors(null);
+    this.checkOutForm.controls.address_line1.setErrors(null);
+    this.checkOutForm.controls.zip.setErrors(null);
   }
 }

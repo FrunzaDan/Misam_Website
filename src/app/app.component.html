@@ -5,6 +5,6 @@
 <app-footer></app-footer>
 
 <div class="notifications-container">
-    <app-notification *ngFor="let notification of notifications$ | async" [notification]="notification" @transformIn
-        @transformOut></app-notification>
+    <app-notification *ngFor="let notification of notifications$ | async" [notification]="notification" @fadeIn
+        @fadeOut></app-notification>
 </div>

@@ -20,10 +20,13 @@ import { SendEmailService } from '../../services/send-email.service';
   imports: [CommonModule, RouterModule, FormsModule, ReactiveFormsModule],
   templateUrl: './checkout.component.html',
   styleUrl: './checkout.component.css',
+  animations: [],
 })
 export class CheckoutComponent implements OnInit {
   public totalNumberOfCartProducts!: number;
   public totalPrice!: number;
+  showConfirmCheckout: boolean = false;
+  order: string = '';
 
   constructor(
     private cartService: CartService,
@@ -42,8 +45,8 @@ export class CheckoutComponent implements OnInit {
       Validators.pattern('^[0-9]{9,12}$'),
     ]),
     town: new FormControl('', [Validators.required]),
-    street_address: new FormControl('', [Validators.required]),
     address_line1: new FormControl('', [Validators.required]),
+    address_line2: new FormControl('', [Validators.required]),
     zip: new FormControl('', [Validators.required]),
   });
 
@@ -77,6 +80,11 @@ export class CheckoutComponent implements OnInit {
     this.router.navigate(['/cart']);
   }
 
+  handleCloseConfirmCheckoutClick(event: Event): void {
+    event.preventDefault();
+    this.showConfirmCheckout = false;
+  }
+
   onSubmit(): void {
     this.submitted = true;
     if (this.checkOutForm.invalid) {
@@ -85,11 +93,13 @@ export class CheckoutComponent implements OnInit {
 
     let checkOutFormData: CheckOutForm = this.checkOutForm
       .value as CheckOutForm;
-    let order: string = this.buildOrder(checkOutFormData);
+    this.order = this.buildOrder(checkOutFormData);
 
-    console.log(order);
+    console.log(this.order);
 
-    this.resetForm(checkOutFormData);
+    this.showConfirmCheckout = true;
+
+    // this.resetForm(checkOutFormData);
   }
 
   buildOrder(checkOutForm: CheckOutForm): string {
@@ -109,10 +119,10 @@ export class CheckoutComponent implements OnInit {
       checkOutForm.town +
       '\n' +
       'Stradă: ' +
-      checkOutForm.street_address +
+      checkOutForm.address_line1 +
       '\n' +
       'Număr: ' +
-      checkOutForm.address_line1 +
+      checkOutForm.address_line2 +
       '\n' +
       'Cod poștal: ' +
       checkOutForm.zip +
@@ -120,31 +130,31 @@ export class CheckoutComponent implements OnInit {
       '--------------------' +
       '\n';
 
-    let productString: string = 'Produse: \n\n';
+    let productString: string = 'Produse: \n';
     let customer_ordered_products: Product[] | null =
       this.localStorageService.getCartProductsLocal();
     if (customer_ordered_products) {
       for (let product of customer_ordered_products) {
         productString +=
           '\n' +
-          'Produs: ' +
           product.title +
-          '\n' +
-          'Preț: ' +
+          ': ' +
           product.price +
-          '\n' +
-          'Cantitate: ' +
+          ' RON x ' +
           product.quantity +
-          '\n' +
-          '--------------------';
+          ' buc.';
       }
       productString +=
         '\n' +
+        '--------------------' +
+        '\n' +
         'Număr produse: ' +
         this.totalNumberOfCartProducts +
+        ' buc.' +
         '\n' +
         'Preț total: ' +
-        this.totalPrice;
+        this.totalPrice +
+        ' RON';
     }
 
     let order: string = customer_contact_info + '\n' + productString;
@@ -158,8 +168,8 @@ export class CheckoutComponent implements OnInit {
     this.checkOutForm.controls.email.setErrors(null);
     this.checkOutForm.controls.phone.setErrors(null);
     this.checkOutForm.controls.town.setErrors(null);
-    this.checkOutForm.controls.street_address.setErrors(null);
     this.checkOutForm.controls.address_line1.setErrors(null);
+    this.checkOutForm.controls.address_line2.setErrors(null);
     this.checkOutForm.controls.zip.setErrors(null);
   }
 }

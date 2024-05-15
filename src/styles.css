@@ -178,7 +178,7 @@ iframe:focus {
     position: relative;
     transition: all .2s;
     transform-origin: 50% 50%;
-    filter: drop-shadow(4px 4px var(--violet)) drop-shadow(4px 4px var(--red));
+    filter: drop-shadow(4px 4px var(--red));
 }
 
 @media (pointer: fine) {
@@ -225,7 +225,7 @@ iframe:focus {
 
     .SAL-SOL:hover {
         transform: scale(1.04);
-        filter: drop-shadow(6px 6px var(--violet)) drop-shadow(6px 6px var(--red));
+        filter: drop-shadow(6px 6px var(--red));
     }
 
 

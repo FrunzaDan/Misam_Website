@@ -3,7 +3,7 @@ export interface CheckOutForm {
   email: string;
   phone: string;
   town: string;
-  street_address: string;
   address_line1: string;
+  address_line2: string;
   zip: string;
 }

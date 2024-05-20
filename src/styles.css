@@ -46,6 +46,7 @@ body {
     scroll-behavior: smooth;
     scrollbar-width: thin;
     font-family: var(--regular-font);
+    overscroll-behavior: contain;
 }
 
 @font-face {
@@ -148,6 +149,19 @@ iframe:focus {
 
 .width-100prc {
     width: 100%;
+}
+
+.full-view-background {
+    z-index: 20;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100dvw;
+    height: 100dvh;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(var(--main-red-for-alpha), 0.8)
 }
 
 .hover-logo {

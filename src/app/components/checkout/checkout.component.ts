@@ -13,6 +13,7 @@ import { Product } from '../../interfaces/product';
 import { CartService } from '../../services/cart.service';
 import { LocalStorageService } from '../../services/local-storage.service';
 import { SendEmailService } from '../../services/send-email.service';
+import { fadeIn, fadeOut, transformIn, transformOut } from '../../animations';
 
 @Component({
   selector: 'app-checkout',
@@ -20,7 +21,7 @@ import { SendEmailService } from '../../services/send-email.service';
   imports: [CommonModule, RouterModule, FormsModule, ReactiveFormsModule],
   templateUrl: './checkout.component.html',
   styleUrl: './checkout.component.css',
-  animations: [],
+  animations: [transformIn, transformOut, fadeIn, fadeOut],
 })
 export class CheckoutComponent implements OnInit {
   public totalNumberOfCartProducts!: number;

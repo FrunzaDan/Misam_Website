@@ -1,14 +1,14 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { RouterModule } from '@angular/router';
-import { FormsModule } from '@angular/forms';
-import { FetchProductsService } from '../../services/fetch-products.service';
-import { CartService } from '../../services/cart.service';
 import { CommonModule } from '@angular/common';
-import { FilterPipe } from '../../shared/filter.pipe';
-import { Product } from '../../interfaces/product';
-import { Notification } from '../../interfaces/notification';
-import { NotificationService } from '../../services/notification.service';
+import { Component, OnInit } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 import { Subscription } from 'rxjs/internal/Subscription';
+import { Notification } from '../../interfaces/notification';
+import { Product } from '../../interfaces/product';
+import { CartService } from '../../services/cart.service';
+import { FetchProductsService } from '../../services/fetch-products.service';
+import { NotificationService } from '../../services/notification.service';
+import { FilterPipe } from '../../shared/filter.pipe';
 
 @Component({
   standalone: true,

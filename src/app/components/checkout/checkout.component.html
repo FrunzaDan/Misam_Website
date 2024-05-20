@@ -106,7 +106,8 @@
 </div>
 <div class="container m-4 p-4"></div>
 
-<div id="confirm-checkout-modal" *ngIf="showConfirmCheckout">
+<div class="full-view-background" *ngIf="showConfirmCheckout" @fadeIn @fadeOut></div>
+<div id="confirm-checkout-modal" *ngIf="showConfirmCheckout" @transformIn @transformOut>
     <div class="subtitle-2 text-color-red text-center p-2">Comanda mea:</div>
     <div id="order-content">
         {{order}}

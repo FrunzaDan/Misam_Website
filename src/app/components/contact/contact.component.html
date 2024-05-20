@@ -3,12 +3,9 @@
         <div class="col-md-7 px-4">
             <div class="card p-2 my-2">
                 <div class="card-body">
-                    <div class="d-flex justify-content-center">
-                    </div>
                     <form [formGroup]="contactMeForm" #formDirective="ngForm" id="contactForm" (ngSubmit)="onSubmit()">
                         <div class="mb-3">
                             <label for="name" class="form-label">Nume:</label>
-
                             <input class="form-control" formControlName="name" name="name" type="text"
                                 placeholder="Numele tău" [ngClass]="{ 'is-invalid': submitted && f.name.errors }" />
                             <div *ngIf="submitted && f.name.errors" class="invalid-feedback">

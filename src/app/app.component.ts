@@ -1,5 +1,4 @@
 import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Analytics } from '@angular/fire/analytics';
 import { RouterOutlet } from '@angular/router';
@@ -21,7 +20,6 @@ import { fadeIn, fadeOut } from './animations';
     FooterComponent,
     CommonModule,
     RouterOutlet,
-    HttpClientModule,
     NotificationComponent,
   ],
   animations: [fadeIn, fadeOut],

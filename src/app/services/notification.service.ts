@@ -6,21 +6,25 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root',
 })
 export class NotificationService {
-  private notificationsSubject = new BehaviorSubject<Notification[]>([]);
+  private maxNotifications: number = 1;
+  private notificationsSubject: BehaviorSubject<Notification[]> =
+    new BehaviorSubject<Notification[]>([]);
 
   get notifications$(): BehaviorSubject<Notification[]> {
     return this.notificationsSubject;
   }
 
-  addNotification(notification: Notification) {
-    const currentNotifications = this.notificationsSubject.getValue();
+  addNotification(notification: Notification): void {
+    const currentNotifications: Notification[] = this.notificationsSubject
+      .getValue()
+      .slice(0, this.maxNotifications - 1);
     this.notificationsSubject.next([...currentNotifications, notification]);
   }
 
-  removeNotification(notification: Notification) {
-    const index = this.notificationsSubject
+  removeNotification(notification: Notification): void {
+    const index: number = this.notificationsSubject
       .getValue()
-      .findIndex((n) => n === notification);
+      .findIndex((n: Notification): boolean => n === notification);
     if (index !== -1) {
       this.notificationsSubject.next([
         ...this.notificationsSubject.getValue().slice(0, index),

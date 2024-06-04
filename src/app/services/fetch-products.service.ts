@@ -45,7 +45,7 @@ export class FetchProductsService {
           .valueChanges()
           .pipe(
             tap({
-              next: (products) => {
+              next: (products): void => {
                 try {
                   this.sessionStorageService.setProductsSession(products);
                 } catch {
@@ -58,10 +58,6 @@ export class FetchProductsService {
             })
           );
       if (productsListObservable) {
-        let notification: Notification = {
-          message: 'Produse încărcate de pe server ✔',
-        };
-        this.notificationService.addNotification(notification);
         return productsListObservable;
       } else {
         return of([]);

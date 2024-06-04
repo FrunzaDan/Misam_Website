@@ -22,7 +22,7 @@
 }
 
 .selected-btn {
-    box-shadow: 0.4rem 1rem 2rem rgba(255, 255, 255, 0.8);
+    box-shadow: 0.4rem 1rem 4rem rgba(255, 255, 255, 1);
 }
 
 *,

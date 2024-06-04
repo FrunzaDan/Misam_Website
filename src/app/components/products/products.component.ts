@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { Subscription } from 'rxjs/internal/Subscription';
@@ -9,6 +9,8 @@ import { CartService } from '../../services/cart.service';
 import { FetchProductsService } from '../../services/fetch-products.service';
 import { NotificationService } from '../../services/notification.service';
 import { FilterPipe } from '../../shared/filter.pipe';
+import { CategoryService } from '../../services/cathegory.service';
+import { take } from 'rxjs/internal/operators/take';
 
 @Component({
   standalone: true,
@@ -17,32 +19,42 @@ import { FilterPipe } from '../../shared/filter.pipe';
   templateUrl: './products.component.html',
   styleUrl: './products.component.css',
 })
-export class ProductsComponent implements OnInit {
+export class ProductsComponent implements OnInit, OnDestroy {
   public productsList: Product[] = [];
   public totalNumberOfCartProducts: number = 0;
   public totalPrice: number = 0;
   public searchString: string = '';
   public searchFilterProductsList: Product[] = [];
-  selectedCategory: string | undefined;
+  public selectedCategory: string | undefined;
   public currentNotifications: Notification | null = null;
   public notifications: Notification[] = [];
 
-  private productSubscription: Subscription | null = null;
-  private cartSubscription: Subscription | null = null;
+  private productSubscription?: Subscription;
+  private cartSubscription?: Subscription;
 
   constructor(
     private fetchProductsService: FetchProductsService,
     private cartService: CartService,
     private filter: FilterPipe,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private categoryService: CategoryService
   ) {}
 
   ngOnInit(): void {
-    this.displayProductsContent();
+    this.categoryService
+      .getSelectedCategory()
+      .pipe(take(1))
+      .subscribe((response: string | undefined) => {
+        this.selectedCategory = response;
+        this.unsubscribeIfActive();
+      });
+
+    this.displayProductsContent(this.selectedCategory);
     this.displayNumberOfProductsForCart();
   }
 
-  async displayProductsContent(selectedCategory?: string) {
+  async displayProductsContent(selectedCategory?: string): Promise<void> {
+    this.selectedCategory = selectedCategory;
     if (!selectedCategory) {
       this.selectedCategory = undefined;
     }
@@ -70,19 +82,14 @@ export class ProductsComponent implements OnInit {
   displayNumberOfProductsForCart() {
     this.cartSubscription = this.cartService
       .getNumberOfProductsForCart()
-      .subscribe((totalNumberOfProducts) => {
+      .subscribe((totalNumberOfProducts: number) => {
         this.totalNumberOfCartProducts = totalNumberOfProducts;
       });
   }
 
-  onCategorySelect(category: string) {
-    this.selectedCategory = category;
-    this.displayProductsContent(this.selectedCategory);
-  }
-
   addToCart(product: Product) {
-    let isSuccesful = this.cartService.addCartProduct(product);
-    if (isSuccesful) {
+    let isSuccessful = this.cartService.addCartProduct(product);
+    if (isSuccessful) {
       let notification: Notification = {
         message: `"${product.title}" a fost adăugat!`,
       };
@@ -95,5 +102,16 @@ export class ProductsComponent implements OnInit {
     this.searchFilterProductsList = searchString
       ? this.filter.transform(this.productsList, searchString, 'title')
       : this.productsList;
+  }
+
+  ngOnDestroy() {
+    this.unsubscribeIfActive();
+  }
+
+  private unsubscribeIfActive(): void {
+    if (this.productSubscription) {
+      this.productSubscription.unsubscribe();
+      this.productSubscription = undefined;
+    }
   }
 }

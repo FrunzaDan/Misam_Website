@@ -1,12 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/compat/database';
-import { Observable, of } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
+import { Observable } from 'rxjs/internal/Observable';
+import { of } from 'rxjs/internal/observable/of';
+import { map } from 'rxjs/internal/operators/map';
+import { tap } from 'rxjs/internal/operators/tap';
 import { Product } from '../interfaces/product';
 import { NotificationService } from './notification.service';
 import { SessionStorageService } from './session-storage.service';
-import { Notification } from '../interfaces/notification';
 
 @Injectable({
   providedIn: 'root',

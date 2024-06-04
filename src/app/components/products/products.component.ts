@@ -54,25 +54,23 @@ export class ProductsComponent implements OnInit, OnDestroy {
     if (!selectedCategory) {
       this.selectedCategory = undefined;
     }
-
-    this.productSubscription = this.fetchProductsService
-      .fetchProducts()
-      .subscribe((productList: Product[]): void => {
-        this.productsList = productList;
-        this.searchFilterProductsList = this.productsList;
-
-        if (selectedCategory) {
-          this.searchFilterProductsList = this.productsList.filter(
-            (product: Product): boolean => product.category === selectedCategory
-          );
-        } else {
+    if (this.productsList.length == 0) {
+      this.productSubscription = this.fetchProductsService
+        .fetchProducts()
+        .subscribe((productList: Product[]): void => {
+          this.productsList = productList;
           this.searchFilterProductsList = this.productsList;
-        }
-
-        this.searchFilterProductsList.forEach((a: Product): void => {
-          Object.assign(a, { quantity: a.quantity, total: a.price });
         });
-      });
+    }
+
+    if (selectedCategory) {
+      this.searchFilterProductsList = this.productsList.filter(
+        (product: Product): boolean => product.category === selectedCategory
+      );
+    }
+    this.searchFilterProductsList.forEach((a: Product): void => {
+      Object.assign(a, { quantity: a.quantity, total: a.price });
+    });
   }
 
   getProductCathegory(): void {

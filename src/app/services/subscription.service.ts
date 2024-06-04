@@ -7,10 +7,11 @@ import { Subscription } from 'rxjs/internal/Subscription';
 export class SubscriptionService {
   constructor() {}
 
-  public unsubscribeIfActive(subscription: Subscription | undefined): void {
-    if (subscription) {
+  public unsubscribeIfActive(
+    subscription: Subscription | null | undefined
+  ): void {
+    if (subscription && !subscription.closed) {
       subscription.unsubscribe();
-      subscription = undefined;
     }
   }
 }

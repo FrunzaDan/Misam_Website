@@ -13,12 +13,12 @@ export const routes: Routes = [
   {
     path: 'home',
     component: HomeComponent,
-    title: 'Home',
+    title: 'Bine ați venit!',
   },
   {
     path: '',
     component: HomeComponent,
-    title: 'Home',
+    title: 'Bine ați venit!',
   },
   {
     path: 'products',

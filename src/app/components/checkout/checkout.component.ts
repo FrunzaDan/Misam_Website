@@ -98,7 +98,6 @@ export class CheckoutComponent implements OnInit {
 
     if (this.order) {
       this.showConfirmCheckout = true;
-      console.log(this.order);
     }
     // this.resetForm(checkOutFormData);
   }

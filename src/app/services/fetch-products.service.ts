@@ -25,10 +25,6 @@ export class FetchProductsService {
         this.sessionStorageService.getProductsSession();
 
       if (sessionProductsList.length != 0) {
-        let notification: Notification = {
-          message: 'Produse încărcate din sesiune ✔',
-        };
-        this.notificationService.addNotification(notification);
         return of(sessionProductsList);
       } else {
         let firebaseProductsList = this.fetchProductsFromFirebaseRealtimeDB();

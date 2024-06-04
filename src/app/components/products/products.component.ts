@@ -55,13 +55,6 @@ export class ProductsComponent implements OnInit, OnDestroy {
       this.selectedCategory = undefined;
     }
 
-    // this.getCathegorySubscription = this.categoryService
-    //   .getSelectedCategory()
-    //   .pipe(take(1))
-    //   .subscribe((response: string | undefined): void => {
-    //     this.selectedCategory = response;
-    //   });
-
     this.productSubscription = this.fetchProductsService
       .fetchProducts()
       .subscribe((productList: Product[]): void => {

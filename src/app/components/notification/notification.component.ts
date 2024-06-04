@@ -32,7 +32,7 @@ export class NotificationComponent implements OnInit, OnDestroy {
     if (this.timeoutId) {
       clearTimeout(this.timeoutId as unknown as number | undefined);
     }
-    this.timeoutId = setTimeout(() => this.dismissNotification(), 2000);
+    this.timeoutId = setTimeout(() => this.dismissNotification(), 4000);
   }
 
   dismissNotification() {

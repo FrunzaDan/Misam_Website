@@ -11,6 +11,7 @@ import { NotificationService } from '../../services/notification.service';
 import { FilterPipe } from '../../shared/filter.pipe';
 import { CategoryService } from '../../services/cathegory.service';
 import { take } from 'rxjs/internal/operators/take';
+import { SubscriptionService } from '../../services/subscription.service';
 
 @Component({
   standalone: true,
@@ -30,6 +31,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
   public notifications: Notification[] = [];
 
   private productSubscription?: Subscription;
+  private getCathegorySubscription?: Subscription;
   private cartSubscription?: Subscription;
 
   constructor(
@@ -37,18 +39,12 @@ export class ProductsComponent implements OnInit, OnDestroy {
     private cartService: CartService,
     private filter: FilterPipe,
     private notificationService: NotificationService,
-    private categoryService: CategoryService
+    private categoryService: CategoryService,
+    private subscriptionService: SubscriptionService
   ) {}
 
   ngOnInit(): void {
-    this.categoryService
-      .getSelectedCategory()
-      .pipe(take(1))
-      .subscribe((response: string | undefined) => {
-        this.selectedCategory = response;
-        this.unsubscribeIfActive();
-      });
-
+    this.getProductCathegory();
     this.displayProductsContent(this.selectedCategory);
     this.displayNumberOfProductsForCart();
   }
@@ -79,6 +75,16 @@ export class ProductsComponent implements OnInit, OnDestroy {
       });
   }
 
+  getProductCathegory(): void {
+    this.getCathegorySubscription = this.categoryService
+      .getSelectedCategory()
+      .pipe(take(1))
+      .subscribe((response: string | undefined) => {
+        this.selectedCategory = response;
+      });
+    this.subscriptionService.unsubscribeIfActive(this.getCathegorySubscription);
+  }
+
   displayNumberOfProductsForCart() {
     this.cartSubscription = this.cartService
       .getNumberOfProductsForCart()
@@ -105,13 +111,6 @@ export class ProductsComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.unsubscribeIfActive();
-  }
-
-  private unsubscribeIfActive(): void {
-    if (this.productSubscription) {
-      this.productSubscription.unsubscribe();
-      this.productSubscription = undefined;
-    }
+    this.subscriptionService.unsubscribeIfActive(this.productSubscription);
   }
 }

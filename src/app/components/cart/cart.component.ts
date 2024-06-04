@@ -25,7 +25,7 @@ export class CartComponent implements OnInit {
     private notificationService: NotificationService
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.displayCartContent();
     this.displayTotalNumberOfCartProducts();
     this.displayTotalPrice();

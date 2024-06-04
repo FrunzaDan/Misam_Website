@@ -18,7 +18,7 @@ export class NotificationComponent implements OnInit, OnDestroy {
 
   constructor(private notificationService: NotificationService) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.startTimeout();
   }
 

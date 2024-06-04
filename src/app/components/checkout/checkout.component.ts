@@ -26,8 +26,8 @@ import { fadeIn, fadeOut, transformIn, transformOut } from '../../animations';
 export class CheckoutComponent implements OnInit {
   public totalNumberOfCartProducts!: number;
   public totalPrice!: number;
-  showConfirmCheckout: boolean = false;
-  order: string = '';
+  public showConfirmCheckout: boolean = false;
+  public order?: string;
 
   constructor(
     private cartService: CartService,
@@ -36,7 +36,7 @@ export class CheckoutComponent implements OnInit {
     private localStorageService: LocalStorageService
   ) {}
 
-  submitted = false;
+  submitted: boolean = false;
 
   checkOutForm = new FormGroup({
     name: new FormControl('', [Validators.required]),
@@ -96,10 +96,10 @@ export class CheckoutComponent implements OnInit {
       .value as CheckOutForm;
     this.order = this.buildOrder(checkOutFormData);
 
-    console.log(this.order);
-
-    this.showConfirmCheckout = true;
-
+    if (this.order) {
+      this.showConfirmCheckout = true;
+      console.log(this.order);
+    }
     // this.resetForm(checkOutFormData);
   }
 
@@ -160,12 +160,11 @@ export class CheckoutComponent implements OnInit {
         ' RON';
     }
 
-    let order: string = (orderString + productString).trim();
-
-    return order;
+    let order: string = orderString + productString;
+    return order.trim();
   }
 
-  resetForm(checkOutForm: CheckOutForm) {
+  resetForm(checkOutForm: CheckOutForm): void {
     this.checkOutForm.reset();
     this.checkOutForm.controls.name.setErrors(null);
     this.checkOutForm.controls.email.setErrors(null);

@@ -57,7 +57,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
 
     this.productSubscription = this.fetchProductsService
       .fetchProducts()
-      .subscribe((productList: Product[]) => {
+      .subscribe((productList: Product[]): void => {
         this.productsList = productList;
         this.searchFilterProductsList = this.productsList;
 
@@ -69,7 +69,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
           this.searchFilterProductsList = this.productsList;
         }
 
-        this.searchFilterProductsList.forEach((a: Product) => {
+        this.searchFilterProductsList.forEach((a: Product): void => {
           Object.assign(a, { quantity: a.quantity, total: a.price });
         });
       });
@@ -79,22 +79,22 @@ export class ProductsComponent implements OnInit, OnDestroy {
     this.getCathegorySubscription = this.categoryService
       .getSelectedCategory()
       .pipe(take(1))
-      .subscribe((response: string | undefined) => {
+      .subscribe((response: string | undefined): void => {
         this.selectedCategory = response;
       });
     this.subscriptionService.unsubscribeIfActive(this.getCathegorySubscription);
   }
 
-  displayNumberOfProductsForCart() {
+  displayNumberOfProductsForCart(): void {
     this.cartSubscription = this.cartService
       .getNumberOfProductsForCart()
-      .subscribe((totalNumberOfProducts: number) => {
+      .subscribe((totalNumberOfProducts: number): void => {
         this.totalNumberOfCartProducts = totalNumberOfProducts;
       });
   }
 
-  addToCart(product: Product) {
-    let isSuccessful = this.cartService.addCartProduct(product);
+  addToCart(product: Product): void {
+    let isSuccessful: boolean = this.cartService.addCartProduct(product);
     if (isSuccessful) {
       let notification: Notification = {
         message: `"${product.title}" a fost adăugat!`,
@@ -103,14 +103,15 @@ export class ProductsComponent implements OnInit, OnDestroy {
     }
   }
 
-  search(keyboardEvent: Event) {
-    const searchString = (keyboardEvent.target as HTMLInputElement).value;
+  search(keyboardEvent: Event): void {
+    const searchString: string = (keyboardEvent.target as HTMLInputElement)
+      .value;
     this.searchFilterProductsList = searchString
       ? this.filter.transform(this.productsList, searchString, 'title')
       : this.productsList;
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.subscriptionService.unsubscribeIfActive(this.productSubscription);
   }
 }

@@ -104,8 +104,8 @@ export class CheckoutComponent implements OnInit {
   }
 
   buildOrder(checkOutForm: CheckOutForm): string {
+    let orderString: string = 'Comanda: \n';
     let customer_contact_info: string =
-      'Comanda: \n' +
       'Nume client: ' +
       checkOutForm.name +
       '\n' +
@@ -131,7 +131,9 @@ export class CheckoutComponent implements OnInit {
       '--------------------' +
       '\n';
 
-    let productString: string = 'Produse: \n';
+    orderString += '\n' + customer_contact_info;
+
+    let productString: string = 'Produse: ';
     let customer_ordered_products: Product[] | null =
       this.localStorageService.getCartProductsLocal();
     if (customer_ordered_products) {
@@ -158,7 +160,7 @@ export class CheckoutComponent implements OnInit {
         ' RON';
     }
 
-    let order: string = customer_contact_info + '\n' + productString;
+    let order: string = (orderString + productString).trim();
 
     return order;
   }

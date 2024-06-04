@@ -67,6 +67,8 @@ export class ProductsComponent implements OnInit, OnDestroy {
       this.searchFilterProductsList = this.productsList.filter(
         (product: Product): boolean => product.category === selectedCategory
       );
+    } else {
+      this.searchFilterProductsList = this.productsList;
     }
     this.searchFilterProductsList.forEach((a: Product): void => {
       Object.assign(a, { quantity: a.quantity, total: a.price });

@@ -55,6 +55,13 @@ export class ProductsComponent implements OnInit, OnDestroy {
       this.selectedCategory = undefined;
     }
 
+    // this.getCathegorySubscription = this.categoryService
+    //   .getSelectedCategory()
+    //   .pipe(take(1))
+    //   .subscribe((response: string | undefined): void => {
+    //     this.selectedCategory = response;
+    //   });
+
     this.productSubscription = this.fetchProductsService
       .fetchProducts()
       .subscribe((productList: Product[]): void => {
@@ -82,7 +89,6 @@ export class ProductsComponent implements OnInit, OnDestroy {
       .subscribe((response: string | undefined): void => {
         this.selectedCategory = response;
       });
-    this.subscriptionService.unsubscribeIfActive(this.getCathegorySubscription);
   }
 
   displayNumberOfProductsForCart(): void {
@@ -104,6 +110,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
   }
 
   search(keyboardEvent: Event): void {
+    this.selectedCategory = undefined;
     const searchString: string = (keyboardEvent.target as HTMLInputElement)
       .value;
     this.searchFilterProductsList = searchString
@@ -113,5 +120,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subscriptionService.unsubscribeIfActive(this.productSubscription);
+    this.subscriptionService.unsubscribeIfActive(this.getCathegorySubscription);
+    this.subscriptionService.unsubscribeIfActive(this.cartSubscription);
   }
 }

@@ -19,7 +19,17 @@
                         <td valign="middle">{{product.title}}</td>
                         <td valign="middle"><img src="{{product.image}}" alt="product-image" class="table-product-img">
                         </td>
-                        <td valign="middle">{{product.quantity}}</td>
+                        <td valign="middle">
+                            <span><button (click)="removeOneProduct(product)" class="btn-math">
+                                    -
+                                </button>
+                            </span>
+                            <span>{{product.quantity}}</span>
+                            <span><button (click)="addOneProduct(product)" class="btn-math">
+                                    +
+                                </button>
+                            </span>
+                        </td>
                         <td valign="middle">{{product.price}} RON</td>
                         <td valign="middle">
                             <button (click)="removeFromCart(product)" class="btn btn-primary">

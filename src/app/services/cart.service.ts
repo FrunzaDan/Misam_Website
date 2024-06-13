@@ -23,8 +23,8 @@ export class CartService {
   }
 
   addCartProduct(addedProduct: Product): boolean {
-    const existingProduct = this.cartProductsList.find(
-      (item) => item.id === addedProduct.id
+    const existingProduct: Product | undefined = this.cartProductsList.find(
+      (item: Product): boolean => item.id === addedProduct.id
     );
 
     if (existingProduct) {
@@ -39,9 +39,35 @@ export class CartService {
     }
   }
 
+  removeOneCartProduct(product: Product): boolean {
+    const productIndex: number = this.cartProductsList.findIndex(
+      (item: Product): boolean => item.id === product.id
+    );
+
+    if (productIndex !== -1) {
+      this.cartProductsList[productIndex].quantity--;
+      this.updateCartStateAndStorage();
+      return true;
+    }
+    return false;
+  }
+
+  addOneCartProduct(product: Product): boolean {
+    const productIndex: number = this.cartProductsList.findIndex(
+      (item: Product): boolean => item.id === product.id
+    );
+
+    if (productIndex !== -1) {
+      this.cartProductsList[productIndex].quantity++;
+      this.updateCartStateAndStorage();
+      return true;
+    }
+    return false;
+  }
+
   removeCartProduct(product: Product): boolean {
-    const productIndex = this.cartProductsList.findIndex(
-      (item) => item.id === product.id
+    const productIndex: number = this.cartProductsList.findIndex(
+      (item: Product): boolean => item.id === product.id
     );
 
     if (productIndex !== -1) {
@@ -49,7 +75,6 @@ export class CartService {
       this.updateCartStateAndStorage();
       return true;
     }
-
     return false;
   }
 

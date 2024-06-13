@@ -31,28 +31,62 @@ export class CartComponent implements OnInit {
     this.displayTotalPrice();
   }
 
-  displayCartContent() {
-    this.cartService.getProductsForCartObservable().subscribe((res) => {
-      this.cartProducts = res;
-    });
+  displayCartContent(): void {
+    this.cartService
+      .getProductsForCartObservable()
+      .subscribe((response: Product[]): void => {
+        this.cartProducts = response;
+      });
   }
 
-  displayTotalPrice() {
-    this.cartService.getTotalPrice().subscribe((totalPriceCalculated) => {
-      this.totalPrice = totalPriceCalculated;
-    });
+  displayTotalPrice(): void {
+    this.cartService
+      .getTotalPrice()
+      .subscribe((totalPriceCalculated: number): void => {
+        this.totalPrice = totalPriceCalculated;
+      });
   }
 
-  displayTotalNumberOfCartProducts() {
+  displayTotalNumberOfCartProducts(): void {
     this.cartService
       .getNumberOfProductsForCart()
-      .subscribe((totalNumberOfProducts) => {
+      .subscribe((totalNumberOfProducts: number): void => {
         this.totalNumberOfCartProducts = totalNumberOfProducts;
       });
   }
 
-  removeFromCart(product: Product) {
-    let isSuccesful = this.cartService.removeCartProduct(product);
+  removeOneProduct(product: Product): void {
+    let isSuccesful: boolean = this.cartService.removeOneCartProduct(product);
+    if (isSuccesful) {
+      let notification: Notification = {
+        message: `"${product.title}" - 1`,
+      };
+      this.notificationService.addNotification(notification);
+    }
+    this.cartService
+      .getTotalPrice()
+      .subscribe((totalPriceCalculated: number): void => {
+        this.totalPrice = totalPriceCalculated;
+      });
+  }
+
+  addOneProduct(product: Product): void {
+    let isSuccesful: boolean = this.cartService.addOneCartProduct(product);
+    if (isSuccesful) {
+      let notification: Notification = {
+        message: `"${product.title}" + 1`,
+      };
+      this.notificationService.addNotification(notification);
+    }
+    this.cartService
+      .getTotalPrice()
+      .subscribe((totalPriceCalculated: number): void => {
+        this.totalPrice = totalPriceCalculated;
+      });
+  }
+
+  removeFromCart(product: Product): void {
+    let isSuccesful: boolean = this.cartService.removeCartProduct(product);
     if (isSuccesful) {
       let notification: Notification = {
         message: `"${product.title}" a fost șters!`,
@@ -64,8 +98,8 @@ export class CartComponent implements OnInit {
     });
   }
 
-  emptyCart() {
-    let isSuccesful = this.cartService.removeAllCart();
+  emptyCart(): void {
+    let isSuccesful: boolean = this.cartService.removeAllCart();
     if (isSuccesful) {
       let notification: Notification = {
         message: `Coșul a fost golit!`,

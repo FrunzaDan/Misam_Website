@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
 import { Product } from '../interfaces/product';
 import { LocalStorageService } from './local-storage.service';
+import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
+import { Observable } from 'rxjs/internal/Observable';
 
 @Injectable({
   providedIn: 'root',
@@ -44,8 +45,20 @@ export class CartService {
       (item: Product): boolean => item.id === product.id
     );
 
-    if (productIndex !== -1) {
+    if (
+      productIndex !== -1 &&
+      this.cartProductsList[productIndex].quantity > 1
+    ) {
       this.cartProductsList[productIndex].quantity--;
+      this.updateCartStateAndStorage();
+      return true;
+    }
+    if (
+      productIndex !== -1 &&
+      this.cartProductsList[productIndex].quantity <= 1
+    ) {
+      console.log('trigger');
+      this.cartProductsList.splice(productIndex, 1);
       this.updateCartStateAndStorage();
       return true;
     }

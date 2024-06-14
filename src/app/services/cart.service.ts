@@ -92,38 +92,40 @@ export class CartService {
   }
 
   getTotalPrice(): BehaviorSubject<number> {
-    const cartTotalPriceBehaviorSubject = new BehaviorSubject<number>(0);
+    const totalPriceBehaviorSubject = new BehaviorSubject<number>(0);
 
-    this.getProductsForCartObservable().subscribe((cartProductsList) => {
-      let totalPrice = 0;
-      if (cartProductsList && cartProductsList.length > 0) {
-        cartProductsList.forEach((cartProduct: Product) => {
-          const totalPricePerProduct = cartProduct.price * cartProduct.quantity;
-          totalPrice += totalPricePerProduct;
-        });
-        totalPrice = Math.round(totalPrice * 100) / 100;
+    this.getProductsForCartObservable().subscribe(
+      (cartProductsList: Product[]): void => {
+        const totalPrice: number = cartProductsList.reduce(
+          (acc: number, product: Product): number =>
+            acc + product.price * product.quantity,
+          0
+        );
+        totalPriceBehaviorSubject.next(Math.round(totalPrice * 100) / 100);
       }
-      cartTotalPriceBehaviorSubject.next(totalPrice);
-    });
+    );
 
-    return cartTotalPriceBehaviorSubject;
+    return totalPriceBehaviorSubject;
   }
 
-  getNumberOfProductsForCart() {
+  getNumberOfProductsForCart(): BehaviorSubject<number> {
     const cartProductNumberBehaviorSubject = new BehaviorSubject<number>(0);
 
-    this.getProductsForCartObservable().subscribe((cartProductsList) => {
-      if (!cartProductsList || cartProductsList.length === 0) {
-        cartProductNumberBehaviorSubject.next(0);
-        return;
-      }
+    this.getProductsForCartObservable().subscribe(
+      (cartProductsList: Product[]): void => {
+        if (!cartProductsList || cartProductsList.length === 0) {
+          cartProductNumberBehaviorSubject.next(0);
+          return;
+        }
 
-      const totalItemsInCart = cartProductsList.reduce(
-        (totalQuantity, cartProduct) => totalQuantity + cartProduct.quantity,
-        0
-      );
-      cartProductNumberBehaviorSubject.next(totalItemsInCart);
-    });
+        const totalItemsInCart: number = cartProductsList.reduce(
+          (totalQuantity: number, cartProduct: Product): number =>
+            totalQuantity + cartProduct.quantity,
+          0
+        );
+        cartProductNumberBehaviorSubject.next(totalItemsInCart);
+      }
+    );
 
     return cartProductNumberBehaviorSubject;
   }
@@ -139,8 +141,9 @@ export class CartService {
     this.localStorageService.setCartProductsLocal(this.cartProductsList);
   }
 
-  private loadCartProductsFromLocalStorage() {
-    const products = this.localStorageService.getCartProductsLocal();
+  private loadCartProductsFromLocalStorage(): void {
+    const products: Product[] | null =
+      this.localStorageService.getCartProductsLocal();
     if (products) {
       this.cartProductsList = products;
       this.cartProductsListBehaviorSubject.next(this.cartProductsList);

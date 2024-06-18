@@ -24,8 +24,8 @@ export class CartService {
   }
 
   addProductToCart(product: Product): boolean {
-    const existingProductIndex = this.cartProductsList.findIndex(
-      (item: Product) => item.id === product.id
+    const existingProductIndex: number = this.cartProductsList.findIndex(
+      (item: Product): boolean => item.id === product.id
     );
 
     if (existingProductIndex !== -1) {
@@ -44,24 +44,18 @@ export class CartService {
       (item: Product): boolean => item.id === product.id
     );
 
-    if (
-      productIndex !== -1 &&
-      this.cartProductsList[productIndex].quantity > 1
-    ) {
-      this.cartProductsList[productIndex].quantity--;
-      this.updateCartStateAndStorage();
-      return true;
+    if (productIndex === -1) {
+      console.warn(`Product with id ${product.id} not found in cart`);
+      return false;
     }
-    if (
-      productIndex !== -1 &&
-      this.cartProductsList[productIndex].quantity <= 1
-    ) {
-      console.log('trigger');
+
+    this.cartProductsList[productIndex].quantity--;
+    if (this.cartProductsList[productIndex].quantity <= 0) {
       this.cartProductsList.splice(productIndex, 1);
-      this.updateCartStateAndStorage();
-      return true;
     }
-    return false;
+
+    this.updateCartStateAndStorage();
+    return true;
   }
 
   removeProductsFromCart(product: Product): boolean {
@@ -77,16 +71,20 @@ export class CartService {
     return false;
   }
 
+  private calculateTotalPrice(cartProducts: Product[]): number {
+    return cartProducts.reduce(
+      (acc: number, product: Product): number =>
+        acc + product.price * product.quantity,
+      0
+    );
+  }
+
   getTotalPrice(): BehaviorSubject<number> {
     const totalPriceBehaviorSubject = new BehaviorSubject<number>(0);
 
     this.getProductsForCartObservable().subscribe(
       (cartProductsList: Product[]): void => {
-        const totalPrice: number = cartProductsList.reduce(
-          (acc: number, product: Product): number =>
-            acc + product.price * product.quantity,
-          0
-        );
+        const totalPrice: number = this.calculateTotalPrice(cartProductsList);
         totalPriceBehaviorSubject.next(Math.round(totalPrice * 100) / 100);
       }
     );
@@ -96,14 +94,12 @@ export class CartService {
 
   getNumberOfProductsForCart(): BehaviorSubject<number> {
     const cartProductNumberBehaviorSubject = new BehaviorSubject<number>(0);
-
     this.getProductsForCartObservable().subscribe(
       (cartProductsList: Product[]): void => {
         if (!cartProductsList || cartProductsList.length === 0) {
           cartProductNumberBehaviorSubject.next(0);
           return;
         }
-
         const totalItemsInCart: number = cartProductsList.reduce(
           (totalQuantity: number, cartProduct: Product): number =>
             totalQuantity + cartProduct.quantity,
@@ -112,7 +108,6 @@ export class CartService {
         cartProductNumberBehaviorSubject.next(totalItemsInCart);
       }
     );
-
     return cartProductNumberBehaviorSubject;
   }
 

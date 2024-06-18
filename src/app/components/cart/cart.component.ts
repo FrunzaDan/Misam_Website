@@ -56,7 +56,7 @@ export class CartComponent implements OnInit {
   }
 
   removeOneProduct(product: Product): void {
-    let isSuccesful: boolean = this.cartService.removeOneCartProduct(product);
+    let isSuccesful: boolean = this.cartService.removeProductFromCart(product);
     if (isSuccesful) {
       let notification: Notification = {
         message: `"${product.title}" - 1`,
@@ -71,7 +71,7 @@ export class CartComponent implements OnInit {
   }
 
   addOneProduct(product: Product): void {
-    let isSuccesful: boolean = this.cartService.addOneCartProduct(product);
+    let isSuccesful: boolean = this.cartService.addProductToCart(product);
     if (isSuccesful) {
       let notification: Notification = {
         message: `"${product.title}" + 1`,
@@ -86,7 +86,7 @@ export class CartComponent implements OnInit {
   }
 
   removeFromCart(product: Product): void {
-    let isSuccesful: boolean = this.cartService.removeCartProduct(product);
+    let isSuccesful: boolean = this.cartService.removeProductsFromCart(product);
     if (isSuccesful) {
       let notification: Notification = {
         message: `"${product.title}" a fost șters!`,

@@ -93,7 +93,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
   }
 
   addToCart(product: Product): void {
-    let isSuccessful: boolean = this.cartService.addCartProduct(product);
+    let isSuccessful: boolean = this.cartService.addProductToCart(product);
     if (isSuccessful) {
       let notification: Notification = {
         message: `"${product.title}" a fost adăugat!`,

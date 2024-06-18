@@ -23,24 +23,23 @@ export class CartService {
     return this.cartProductsListBehaviorSubject.asObservable();
   }
 
-  addCartProduct(addedProduct: Product): boolean {
-    const existingProduct: Product | undefined = this.cartProductsList.find(
-      (item: Product): boolean => item.id === addedProduct.id
+  addProductToCart(product: Product): boolean {
+    const existingProductIndex = this.cartProductsList.findIndex(
+      (item: Product) => item.id === product.id
     );
 
-    if (existingProduct) {
-      existingProduct.quantity++;
-      this.updateCartStateAndStorage();
-      return true;
+    if (existingProductIndex !== -1) {
+      this.cartProductsList[existingProductIndex].quantity++;
     } else {
-      addedProduct.quantity = 1;
-      this.cartProductsList.push(addedProduct);
-      this.updateCartStateAndStorage();
-      return true;
+      product.quantity = 1;
+      this.cartProductsList.push(product);
     }
+
+    this.updateCartStateAndStorage();
+    return true;
   }
 
-  removeOneCartProduct(product: Product): boolean {
+  removeProductFromCart(product: Product): boolean {
     const productIndex: number = this.cartProductsList.findIndex(
       (item: Product): boolean => item.id === product.id
     );
@@ -65,20 +64,7 @@ export class CartService {
     return false;
   }
 
-  addOneCartProduct(product: Product): boolean {
-    const productIndex: number = this.cartProductsList.findIndex(
-      (item: Product): boolean => item.id === product.id
-    );
-
-    if (productIndex !== -1) {
-      this.cartProductsList[productIndex].quantity++;
-      this.updateCartStateAndStorage();
-      return true;
-    }
-    return false;
-  }
-
-  removeCartProduct(product: Product): boolean {
+  removeProductsFromCart(product: Product): boolean {
     const productIndex: number = this.cartProductsList.findIndex(
       (item: Product): boolean => item.id === product.id
     );
@@ -136,7 +122,7 @@ export class CartService {
     return true;
   }
 
-  private updateCartStateAndStorage() {
+  private updateCartStateAndStorage(): void {
     this.cartProductsListBehaviorSubject.next(this.cartProductsList.slice());
     this.localStorageService.setCartProductsLocal(this.cartProductsList);
   }

@@ -24,9 +24,10 @@
     font-size: 1.6rem;
     text-decoration: none;
     user-select: none;
-    border: none;
+    border: 1px var(--red) solid;
     padding: 0px 8px;
     margin: 0 8px;
+    transition: all .2s;
 }
 
 .cart-icon {
@@ -254,6 +255,18 @@ iframe:focus {
         color: var(--white) !important;
     }
 
+    .btn-math:hover {
+        background-color: var(--white) !important;
+        border-color: var(--red) !important;
+        color: var(--red) !important;
+    }
+
+    .btn-math:active {
+        background-color: var(--red) !important;
+        border-color: var(--white) !important;
+        color: var(--white) !important;
+    }
+
     .btn-secondary:hover {
         background-color: var(--white) !important;
         border-color: var(--violet) !important;
@@ -289,6 +302,12 @@ iframe:focus {
     }
 
     .btn-primary:active {
+        background-color: var(--white) !important;
+        border-color: var(--red) !important;
+        color: var(--red) !important;
+    }
+
+    .btn-math:active {
         background-color: var(--white) !important;
         border-color: var(--red) !important;
         color: var(--red) !important;

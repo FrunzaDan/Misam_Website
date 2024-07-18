@@ -8,12 +8,12 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
+import { fadeIn, fadeOut, transformIn, transformOut } from '../../animations';
 import { CheckOutForm } from '../../interfaces/check-out-form';
 import { Product } from '../../interfaces/product';
 import { CartService } from '../../services/cart.service';
 import { LocalStorageService } from '../../services/local-storage.service';
 import { SendEmailService } from '../../services/send-email.service';
-import { fadeIn, fadeOut, transformIn, transformOut } from '../../animations';
 
 @Component({
   selector: 'app-checkout',
@@ -63,7 +63,7 @@ export class CheckoutComponent implements OnInit {
   displayTotalPrice(): void {
     this.cartService
       .getTotalPrice()
-      .subscribe((totalPriceCalculated: number) => {
+      .subscribe((totalPriceCalculated: number): void => {
         this.totalPrice = totalPriceCalculated;
       });
   }
@@ -71,7 +71,7 @@ export class CheckoutComponent implements OnInit {
   displayTotalNumberOfCartProducts(): void {
     this.cartService
       .getNumberOfProductsForCart()
-      .subscribe((totalNumberOfProducts: number) => {
+      .subscribe((totalNumberOfProducts: number): void => {
         this.totalNumberOfCartProducts = totalNumberOfProducts;
       });
   }

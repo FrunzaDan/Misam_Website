@@ -6,16 +6,15 @@ import { Observable } from 'rxjs/internal/Observable';
   providedIn: 'root',
 })
 export class CategoryService {
-  private selectedCategorySubject = new BehaviorSubject<string | undefined>(
-    undefined
-  );
+  private selectedCategorySubject: BehaviorSubject<string | undefined> =
+    new BehaviorSubject<string | undefined>(undefined);
   public selectedCategory$: Observable<string | undefined>;
 
   constructor() {
     this.selectedCategory$ = this.selectedCategorySubject.asObservable();
   }
 
-  setSelectedCategory(category: string) {
+  setSelectedCategory(category: string): void {
     this.selectedCategorySubject.next(category);
   }
 

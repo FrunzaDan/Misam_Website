@@ -21,7 +21,7 @@ import { SendEmailService } from '../../services/send-email.service';
 export class ContactComponent implements OnInit {
   constructor(private sendEmailService: SendEmailService) {}
 
-  submitted = false;
+  submitted: boolean = false;
 
   contactMeForm = new FormGroup({
     name: new FormControl('', [Validators.required]),
@@ -39,7 +39,7 @@ export class ContactComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  onSubmit() {
+  onSubmit(): void {
     this.submitted = true;
     if (this.contactMeForm.invalid) {
       return;
@@ -48,7 +48,7 @@ export class ContactComponent implements OnInit {
       this.sendEmailService.sendEmailJS(
         this.contactMeForm.value as ContactMeForm
       );
-    responseCodePromise.then((responseCode) => {
+    responseCodePromise.then((responseCode: number): void => {
       if (responseCode === 200) {
         this.contactMeForm.reset();
         this.contactMeForm.controls.name.setErrors(null);

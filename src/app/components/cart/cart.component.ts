@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CartService } from '../../services/cart.service';
+import { Component, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { Product } from '../../interfaces/product';
 import { Notification } from '../../interfaces/notification';
+import { Product } from '../../interfaces/product';
+import { CartService } from '../../services/cart.service';
 import { NotificationService } from '../../services/notification.service';
 
 @Component({
@@ -93,9 +93,11 @@ export class CartComponent implements OnInit {
       };
       this.notificationService.addNotification(notification);
     }
-    this.cartService.getTotalPrice().subscribe((totalPriceCalculated) => {
-      this.totalPrice = totalPriceCalculated;
-    });
+    this.cartService
+      .getTotalPrice()
+      .subscribe((totalPriceCalculated: number): void => {
+        this.totalPrice = totalPriceCalculated;
+      });
   }
 
   emptyCart(): void {

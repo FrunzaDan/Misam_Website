@@ -2,16 +2,16 @@ import { CommonModule } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { take } from 'rxjs/internal/operators/take';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { Notification } from '../../interfaces/notification';
 import { Product } from '../../interfaces/product';
 import { CartService } from '../../services/cart.service';
+import { CategoryService } from '../../services/cathegory.service';
 import { FetchProductsService } from '../../services/fetch-products.service';
 import { NotificationService } from '../../services/notification.service';
-import { FilterPipe } from '../../shared/filter.pipe';
-import { CategoryService } from '../../services/cathegory.service';
-import { take } from 'rxjs/internal/operators/take';
 import { SubscriptionService } from '../../services/subscription.service';
+import { FilterPipe } from '../../shared/filter.pipe';
 
 @Component({
   standalone: true,

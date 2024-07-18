@@ -55,4 +55,10 @@ td {
     .table-product-img {
         width: 100%;
     }
+
+    td {
+        text-align: center;
+        padding-left: 2px;
+        padding-right: 2px;
+    }
 }

@@ -6,7 +6,6 @@ import { of } from 'rxjs/internal/observable/of';
 import { map } from 'rxjs/internal/operators/map';
 import { tap } from 'rxjs/internal/operators/tap';
 import { Product } from '../interfaces/product';
-import { NotificationService } from './notification.service';
 import { SessionStorageService } from './session-storage.service';
 
 @Injectable({
@@ -16,8 +15,7 @@ export class FetchProductsService {
   constructor(
     private http: HttpClient,
     private firebaseRealtimeDB: AngularFireDatabase,
-    private sessionStorageService: SessionStorageService,
-    private notificationService: NotificationService
+    private sessionStorageService: SessionStorageService
   ) {}
 
   fetchProducts(): Observable<Product[]> {
@@ -28,12 +26,14 @@ export class FetchProductsService {
       if (sessionProductsList.length != 0) {
         return of(sessionProductsList);
       } else {
-        let firebaseProductsList = this.fetchProductsFromFirebaseRealtimeDB();
+        let firebaseProductsList: Observable<Product[]> =
+          this.fetchProductsFromFirebaseRealtimeDB();
         return firebaseProductsList;
       }
     } catch {
       console.error('Fetch error!');
-      let defaultProductsList = this.fetchProductsFromNG();
+      let defaultProductsList: Observable<Product[]> =
+        this.fetchProductsFromNG();
       return defaultProductsList;
     }
   }
@@ -46,7 +46,7 @@ export class FetchProductsService {
           .valueChanges()
           .pipe(
             tap({
-              next: (products): void => {
+              next: (products: Product[]): void => {
                 try {
                   this.sessionStorageService.setProductsSession(products);
                 } catch {
@@ -73,7 +73,7 @@ export class FetchProductsService {
     try {
       return this.http
         .get<{ products: Product[] }>('../../assets/products.json')
-        .pipe(map((data: { products: Product[] }) => data.products));
+        .pipe(map((data: { products: Product[] }): Product[] => data.products));
     } catch {
       console.error('NG storage error!');
       return of([]);

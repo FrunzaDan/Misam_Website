@@ -12,11 +12,10 @@ import { ContactMeForm } from '../../interfaces/contact-me-form';
 import { SendEmailService } from '../../services/send-email.service';
 
 @Component({
-  selector: 'app-contact',
-  standalone: true,
-  imports: [CommonModule, RouterModule, FormsModule, ReactiveFormsModule],
-  templateUrl: './contact.component.html',
-  styleUrl: './contact.component.css',
+    selector: 'app-contact',
+    imports: [CommonModule, RouterModule, FormsModule, ReactiveFormsModule],
+    templateUrl: './contact.component.html',
+    styleUrl: './contact.component.css'
 })
 export class ContactComponent implements OnInit {
   constructor(private sendEmailService: SendEmailService) {}

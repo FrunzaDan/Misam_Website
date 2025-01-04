@@ -16,12 +16,11 @@ import { LocalStorageService } from '../../services/local-storage.service';
 import { SendEmailService } from '../../services/send-email.service';
 
 @Component({
-  selector: 'app-checkout',
-  standalone: true,
-  imports: [CommonModule, RouterModule, FormsModule, ReactiveFormsModule],
-  templateUrl: './checkout.component.html',
-  styleUrl: './checkout.component.css',
-  animations: [transformIn, transformOut, fadeIn, fadeOut],
+    selector: 'app-checkout',
+    imports: [CommonModule, RouterModule, FormsModule, ReactiveFormsModule],
+    templateUrl: './checkout.component.html',
+    styleUrl: './checkout.component.css',
+    animations: [transformIn, transformOut, fadeIn, fadeOut]
 })
 export class CheckoutComponent implements OnInit {
   public totalNumberOfCartProducts!: number;

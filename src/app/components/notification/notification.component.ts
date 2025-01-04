@@ -5,11 +5,10 @@ import { NotificationService } from '../../services/notification.service';
 import { Notification } from '../../interfaces/notification';
 
 @Component({
-  selector: 'app-notification',
-  standalone: true,
-  imports: [FormsModule, CommonModule],
-  templateUrl: './notification.component.html',
-  styleUrl: './notification.component.css',
+    selector: 'app-notification',
+    imports: [FormsModule, CommonModule],
+    templateUrl: './notification.component.html',
+    styleUrl: './notification.component.css'
 })
 export class NotificationComponent implements OnInit, OnDestroy {
   @Input()

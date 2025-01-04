@@ -11,18 +11,17 @@ import { NotificationService } from './services/notification.service';
 import { fadeIn, fadeOut } from './animations';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.css',
-  standalone: true,
-  imports: [
-    NavbarComponent,
-    FooterComponent,
-    CommonModule,
-    RouterOutlet,
-    NotificationComponent,
-  ],
-  animations: [fadeIn, fadeOut],
+    selector: 'app-root',
+    templateUrl: './app.component.html',
+    styleUrl: './app.component.css',
+    imports: [
+        NavbarComponent,
+        FooterComponent,
+        CommonModule,
+        RouterOutlet,
+        NotificationComponent,
+    ],
+    animations: [fadeIn, fadeOut]
 })
 export class AppComponent implements OnInit {
   title = 'Misam';

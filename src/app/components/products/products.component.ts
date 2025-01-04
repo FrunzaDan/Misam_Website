@@ -14,10 +14,10 @@ import { SubscriptionService } from '../../services/subscription.service';
 import { FilterPipe } from '../../shared/filter.pipe';
 
 @Component({
-    imports: [RouterModule, FormsModule, CommonModule, FilterPipe],
-    selector: 'app-products',
-    templateUrl: './products.component.html',
-    styleUrl: './products.component.css'
+  imports: [RouterModule, FormsModule, CommonModule],
+  selector: 'app-products',
+  templateUrl: './products.component.html',
+  styleUrl: './products.component.css',
 })
 export class ProductsComponent implements OnInit, OnDestroy {
   public productsList: Product[] = [];

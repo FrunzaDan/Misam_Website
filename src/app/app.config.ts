@@ -1,10 +1,17 @@
 import { provideHttpClient, withFetch } from '@angular/common/http';
-import { ApplicationConfig, importProvidersFrom } from '@angular/core';
+import {
+  ApplicationConfig,
+  importProvidersFrom,
+  provideZoneChangeDetection,
+} from '@angular/core';
 import { getAnalytics, provideAnalytics } from '@angular/fire/analytics';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { AngularFireModule } from '@angular/fire/compat';
 import { provideDatabase } from '@angular/fire/database';
-import { provideClientHydration } from '@angular/platform-browser';
+import {
+  provideClientHydration,
+  withEventReplay,
+} from '@angular/platform-browser';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import {
   provideRouter,
@@ -19,6 +26,7 @@ import { FilterPipe } from './shared/filter.pipe';
 export const appConfig: ApplicationConfig = {
   providers: [
     provideAnimations(),
+    provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(
       routes,
       withInMemoryScrolling({
@@ -28,7 +36,7 @@ export const appConfig: ApplicationConfig = {
       withViewTransitions()
     ),
 
-    provideClientHydration(),
+    provideClientHydration(withEventReplay()),
     provideHttpClient(withFetch()),
     FilterPipe,
     provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
